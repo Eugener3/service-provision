@@ -48,7 +48,7 @@ module.exports = {
     },
     delete: async (req, res) => {
         try {
-            const candidate = Category.findByIdAndDelete(req.params.id)
+            const candidate = Category.findById(req.params.id)
             if(candidate) {
                 await Category.findByIdAndDelete(req.params.id)
                 res.status(200).json({
@@ -63,5 +63,24 @@ module.exports = {
         } catch (error) {
             res.status(404).json(error)   
         }
+    },
+    update: async (req, res) => {
+        try {
+            const candidate = Category.findById(req.params.id)
+            if(candidate) {
+                await Category.updateOne({_id: req.params.id}, {$set: {nameCategory: req.body.nameCategory}})
+                res.status(200).json({
+                    message: "Категория успешно изменена"
+                })
+            }
+            else {
+                res.status(404).json({
+                    message: "Категория не найдена"
+                })
+            }
+        } catch (error) {
+            res.status(404).json(error) 
+        }
+
     }
 }
