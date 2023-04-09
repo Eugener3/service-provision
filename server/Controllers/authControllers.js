@@ -63,5 +63,10 @@ module.exports = {
             }
 
         }
+    },
+    test: async (req, res) => {
+        const all = req.body
+        res.status(200).json(all)
     }
+
 }
