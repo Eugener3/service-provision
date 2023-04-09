@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Header.module.scss'
 import logo from '../../img/logo.svg'
 
-export const MainHeader = (props) => {
+export const MainHeader = (props ,{user}) => {
   return (
     <header>
         <div className={styles.headerWrapper}>
@@ -13,10 +13,10 @@ export const MainHeader = (props) => {
                 <p>Мои заказы</p>
                 <p>Стать исполнителем</p>
             </div>
-
-            <div className={styles.loginBtn}>
+            {user}
+            {!user (<div className={styles.loginBtn}>
                 <button onClick={props.onClickModal}>Войти</button>
-            </div>
+            </div>)}
         </div>
     </header>
   )

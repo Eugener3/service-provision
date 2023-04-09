@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import http from "../../utils/http"
 
 import styles from "./Modal.module.scss";
 
@@ -67,16 +68,21 @@ export const ModalWindow = (props) => {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    axios({
+    try {
+      const {data} = await axios({
       method: "post",
       url: "http://localhost:3001/api/auth/login",
       data: {
         email: email,
         password: password,
       },
-    });
+    })
+    localStorage.setItem('token', data)
+  } catch (e) {
+    console.log(e.response.data.message)
+  }
   };
 
   return (
