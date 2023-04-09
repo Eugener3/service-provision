@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+
 import styles from './Modal.module.scss'
 
 import btnRemove from "../../img/btn-remove.svg";
@@ -6,6 +8,8 @@ import btnRemove from "../../img/btn-remove.svg";
 import googleIcon from "../../img//socialMedia/google.svg";
 import twitterIcon from "../../img//socialMedia/twitter.svg";
 import vkIcon from "../../img//socialMedia/vkontakte.svg";
+
+
 
 export const ModalWindow = (props) => {
 
@@ -64,6 +68,21 @@ export const ModalWindow = (props) => {
         }
     }
 
+    const handleSubmit = event => {
+        event.preventDefault()
+      axios({
+        method: 'post',
+        url: 'http://localhost:3001/api/auth/login',
+        data: {
+          email: email,
+          password: password
+        }
+      });
+    }
+ 
+  
+ 
+
   return (
     <div className={styles.modalWrapper}>
         <div className={styles.modalWindow}> 
@@ -85,12 +104,12 @@ export const ModalWindow = (props) => {
                 <div></div>
             </div>
             <div>
-                <form action="#" className={styles.btnsAuth}>
+                <form onSubmit={handleSubmit} className={styles.btnsAuth} method='POST'>
                     {(emailDirty && emailError) && <div className={styles.errors}>{emailError}</div>} {/* Если отловятся ошибки, выдавать emailError */}
                     <input value={email} onChange={e => emailHandler(e)} onBlur={e => blurHandler(e)} name='email' type="text" placeholder='Email...'/>
                     {(passwordDirty && passwordError) && <div className={styles.errors}>{passwordError}</div>}
                     <input value={password} onChange={e => passwordHadler(e)} onBlur={e => blurHandler(e)} name='password' type="password" placeholder='Пароль...'/>
-                    <button disabled={!formValid}> Войти </button>  {/*Если форма не валидна, то кнопка не доступна */}
+                    <button disabled={!formValid} onClick={console.log({email, password})} > Войти </button>  {/*Если форма не валидна, то кнопка не доступна */}
                 </form>
             </div>
         </div>
