@@ -30,39 +30,39 @@ module.exports = {
         }
     },
     register: async (req, res) => {
-        const candidate = await User.findOne({email: req.body.email})
-        if(candidate) {
-            res.status(409).json({
-                message: "Пользователь с такой почтой уже существует"
-            })
-        }
-        else {
-            const salt = await bcrypt.genSalt(10)
-            const password = req.body.password
-            const user = new User({
-                email: req.body.email,
-                password: await bcrypt.hash(password, salt),
-                FIO: req.body.FIO,
-                number: req.body.number,
-                age: req.body.age,
-                education: req.body.education,
-                contactTime: req.body.contactTime,
-                avatarUrl: req.body.avatarUrl,
-                description: req.body.description,
-                city: req.body.city
-            })
-            try {
-                user.save()
-                res.status(200).json({
-                    message: "Регистрация прошла успешно"
-                })
-            } catch (error) {
+        try {
+            const candidate = await User.findOne({email: req.body.email})
+            if(candidate) {
                 res.status(409).json({
-                    message: error
+                    message: "Пользователь с такой почтой уже существует"
                 })
             }
-
+            else {
+                const salt = await bcrypt.genSalt(10)
+                const password = req.body.password
+                const user = new User({
+                    email: req.body.email,
+                    password: await bcrypt.hash(password, salt),
+                    FIO: req.body.FIO,
+                    number: req.body.number,
+                    age: req.body.age,
+                    education: req.body.education,
+                    contactTime: req.body.contactTime,
+                    avatarUrl: req.body.avatarUrl,
+                    description: req.body.description,
+                    city: req.body.city
+                })
+                    user.save()
+                    res.status(200).json({
+                        message: "Регистрация прошла успешно"
+                    })
+            }
+        } catch (error) {
+            res.status(409).json({
+                message: error
+            })
         }
+
     },
     test: async (req, res) => {
         const email = req.body.email
@@ -71,5 +71,4 @@ module.exports = {
             message: "Пошёл нахуй отсюда далбаёб ебучий тебе вообще здесь нехуй делать ебанат иди работай на стройку и не еби себе и другим людям мозги гений ты блять хуев, ебанат кончннный, да я в рот ебал тебя и всю твою семью, гори нахуй в аду, уебище ты блять недоделанное"
         })
     }
-
 }
