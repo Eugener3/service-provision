@@ -31,7 +31,7 @@ function App() {
         <ModalWindowReg  onCloseModal={() => setOpenModalReg(false)}/>
       )}
       <CTAblock />
-      
+
       
       <AboutUS/>
       <div style={{height:'3000px', backgroundColor: 'green'}}></div>
