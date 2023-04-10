@@ -9,40 +9,17 @@ const userSchema = new Schema({
         unique: true
     },
     password: {
-        type: String, 
-        required: true
-    },  
-    FIO: {
         type: String,
-        required: true
-    },
-    number: {
-        type: String
-    },
-    age: {
-        type: Number,
         required: true,
-        default: 18
     },
-    education: {
+    telephone: {
         type: String,
-        default: "None"
+        required: true,
+        unique: true
     },
-    contactTime: {
-        type: String,
-        default: "None"
-    },
-    avatarUrl: {
-        type: String,
-        default: "/Картинка"
-    },
-    description: {
-        type: String,
-        default: "None"
-    },
-    city: {
-        type: String,
-        default: "Кемерово"
+    verify: {
+        type: Boolean,
+        default: false
     }
 })
 

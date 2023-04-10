@@ -14,6 +14,7 @@ module.exports = {
             if(await bcrypt.compare(req.body.password, candidate.password)) {
                 const token = jwt.sign({
                     email: candidate.email,
+                    telephone: candidate.telephone,
                     idUser: candidate._id 
                 }, SECRET_KEY, {expiresIn: '7d'})
                 
@@ -45,14 +46,7 @@ module.exports = {
                 const user = new User({
                     email: req.body.email,
                     password: await bcrypt.hash(password, salt),
-                    FIO: req.body.FIO,
-                    number: req.body.number,
-                    age: req.body.age,
-                    education: req.body.education,
-                    contactTime: req.body.contactTime,
-                    avatarUrl: req.body.avatarUrl,
-                    description: req.body.description,
-                    city: req.body.city
+                    telephone: req.body.telephone
                 })
                     user.save()
                     res.status(200).json({
@@ -65,10 +59,5 @@ module.exports = {
             })
         }
 
-    },
-    test: async (req, res) => {
-        const email = req.body.email
-        const password = req.body.password
-        res.status(202).json(req.headers.authorization)
     }
 }

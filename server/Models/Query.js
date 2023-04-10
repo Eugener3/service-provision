@@ -3,36 +3,34 @@ const {model} = require('mongoose')
 const Schema = mongoose.Schema
 
 const querySchema = new Schema({
-    nameQuery: {
-        type: String,
-        required: true
-    },
-    description: {
-        type: String,
-        default: "none"
-    },
-    refCategory: {
-        ref: "categories",
-        type: Schema.Types.ObjectId,
-        required: true
-    },
     refUser: {
         ref: "users",
         type: Schema.Types.ObjectId,
         required: true
     },
-    exp: {
-        type: String,
-        default: "None"
-    },
-    timeOfWork: {
-        type: String,
-        default: "None"
-    },
-    city: {
+    title: {
         type: String,
         required: true,
-        default: "None"
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: String,
+        required: true
+    },
+    deadline: {
+         type: Date
+    },
+    createData: {
+        type: Date,
+        default: Date.now,
+        required: true
+    },
+    category: {
+        type: String,
+        required: true
     }
 })
 

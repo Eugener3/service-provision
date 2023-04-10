@@ -38,14 +38,14 @@ module.exports = {
     },
     create: async (req, res) => {
         try {
+            const token = req.headers.authorization.split(' ')[1]
+            const decodedData = jwt.verify(token, secret)
             const query = new Query({
-                nameQuery: req.body.nameQuery,
-                description: req.body.description,
-                refCategory: req.body.refCategory,
-                refUser: req.body.refUser,
-                exp: req.body.exp,
-                timeOfWork: req.body.timeOfWork,
-                city: req.body.city
+                refUser: decodedData.idUser,
+                title: req.body.title,
+                price: req.body.price,
+                deadline: req.body.deadline,
+                category: req.body.category
             })
             await query.save()
             res.status(200).json({
@@ -73,13 +73,15 @@ module.exports = {
         try {
             const candidate = await Query.findById(req.params.id)
              if(candidate) {
+                const token = req.headers.authorization.split(' ')[1]
+                const decodedData = jwt.verify(token, secret)
                 const update =  {
-                    nameQuery: req.body.nameQuery,
+                    refUser: decodedData.idUser,
+                    title: req.body.title,
                     description: req.body.description,
-                    refCategory: req.body.refCategory,
-                    exp: req.body.exp,
-                    timeOfWork: req.body.timeOfWork,
-                    city: req.body.city
+                    price: req.body.price,
+                    deadline: req.body.deadline,
+                    category: req.body.category
                 }
                 await Query.updateOne({_id: req.params.id}, update, {
                     new: true
