@@ -1,0 +1,201 @@
+$main-color: #565acf;
+$dark-main-color: #1f2278;
+$hover-color: #f17732;
+
+.modalWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  
+    z-index: 2;
+
+    transition: all 0.7s ease-in-out;
+    
+    background-color: rgba(0, 0, 0, 0.5);
+    
+  
+    .modalWindow {
+      width: 500px;
+      height: 0;
+      overflow: hidden;
+      opacity: 0;
+      
+      border-radius: 50px;
+      background-color: white;
+     
+  
+      animation: slide-in 0.5s ease forwards;
+    }
+  
+    @keyframes slide-in {
+      0% {
+        opacity: 0;
+        transform: translateY(-100vh);
+      }
+      100% {
+        opacity: 1;
+        height: 420px;
+        transform: translateY(0);
+      }
+    }
+  }
+.enterWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    max-width: 500px;
+    height: 25%;
+
+    margin: 0 50px 0 50px;
+
+    border-bottom: 1px solid rgba(86, 90, 207, 0.5);
+    p {
+        margin-left: 20px;
+
+        font-weight: 700;
+        font-size: 32px;
+
+        line-height: 51px;
+        
+        color: $dark-main-color;
+    }
+
+    .circle {
+        border-radius: 30px;
+        background-color: grey;
+        width: 34px;
+        height: 34px;
+    }
+
+    
+}
+
+input::placeholder {color: #000000;}
+input::-webkit-input-placeholder {color: #000000;}
+input::-ms-input-placeholder {color: #000000;}
+input:-moz-placeholder {color: #000000;opacity: 1;}
+input::-moz-placeholder {color: #000000;opacity: 1;}
+input:-ms-input-placeholder {color: #000000;}
+
+.btnsAuth {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto;
+
+    width: 400px;
+    height: 270px;
+   
+    input {
+        margin-top: 20px;
+        padding-left: 20px;
+
+        width: 370px;
+        height: 50px;
+
+        background: white;
+
+        border:1.3px solid rgba(86, 90, 207, 0.5);
+        border-radius: 10px;
+
+        font-size: 16px;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+
+        opacity: 0.8;
+
+        color: black;
+        
+        
+        transition: 0.5s ease-in-out;
+
+    }
+
+    button {
+        margin-top: 35px;
+
+        width: 370px;
+        height: 50px;
+
+        background: $hover-color;
+        border: 1px solid $hover-color;
+        border-radius: 10px;
+
+        cursor: pointer;
+        
+        transition: 0.5s ease-in-out;
+
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        text-align: center;
+
+        color: #FFFFFF;
+
+            &:hover {
+                background: darken($color: $hover-color, $amount: 10%);
+                box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.2);
+            }
+            &:active {
+                background: lighten($color: $hover-color, $amount: 5%);
+            }
+    }
+    .errors {
+        color: red;
+        
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+
+        margin-top: 10px;
+    }
+}
+
+.bottomModalItems {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+        cursor: pointer;
+        text-decoration: underline;
+        margin-left: 20px;
+    }
+}
+
+@keyframes slide-inError {
+    0% {
+      opacity: 0;
+      transform: translateY(-100vh);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+.errorAlert {
+    animation: slide-inError 0.3s ease forwards;
+    margin: 0 auto;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 0px 0px 10px 10px;
+    padding: 15px
+}

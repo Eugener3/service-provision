@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
-import styles from "./Modal.module.scss"
+
+import styles from "./ModalAuth.module.scss"
+import ErrorAlert from "../UI/ErrorAlert/ErrorAlert";
 
 import { BsXLg } from "react-icons/bs"
 
+
 export const ModalWindow = props => {
+  let [errorAlert, setErrorAlert] = useState()
   const [email, setEmail] = useState("")
   const [password, setpassword] = useState("")
 
@@ -45,6 +49,7 @@ export const ModalWindow = props => {
 
     // eslint-disable-next-line
     const re =
+    // eslint-disable-next-line
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
     if (!re.test(String(e.target.value).toLowerCase())) {
       setEmailError("Неккоректный email")
@@ -80,14 +85,20 @@ export const ModalWindow = props => {
       localStorage.setItem("token", data)
       props.onCloseModal()
 
-    } catch (e) {
-      let error = e.response.data.message
-      console.log(error)
+    } catch (error) {
+      setErrorAlert(error.response.data.message)
     }
   }
 
   return (
     <div className={styles.modalWrapper}>
+      {errorAlert && (
+        <div className={styles.errorAlert}>
+        <ErrorAlert>
+           {errorAlert}
+        </ErrorAlert>
+        </div>
+      )}
       <div className={styles.modalWindow}>
         <div className={styles.enterWrapper}>
           <p>Вход</p>
@@ -122,12 +133,18 @@ export const ModalWindow = props => {
           <button disabled={!formValid}>Войти</button>
           {/*Если форма не валидна, то кнопка не доступна */}
         </form>
-        <div className={styles.bottomModalItems}>
+        {/* <div className={styles.bottomModalItems}>
           <p>
             Ещё нет аккаунта?
+            
             <span> Регистрация</span>
+
+            {openModalReg && (
+            <ModalWindowReg  onCloseModal={() => setOpenModalReg(false)}
+            />
+            )}
           </p>
-        </div>
+        </div> */}
       </div>
     </div>
   )

@@ -1,22 +1,22 @@
 import React from "react"
 import styles from "./CTAblock.module.scss"
-import doctor from "../../../img/photos/doctor.png"
+import man from "../../../img/photos/man.png"
 
 const CTAblock = () => {
   return (
     <div className={styles.CTAblock}>
       <div className={styles.wrapper}>
         <div className={styles.leftInfo}>
-          <h6>We Provide All Health Care Solution</h6>
+          <h6>Сервис свободных профессионалов</h6>
           <div className={styles.centerInfo}>
-            <h2>Protect Your Health And Take Care To Of Your Health</h2>
+            <h2>Работаем, чтобы вы могли заниматься своим делом</h2>
           </div>
           <div className={styles.btnWrapper}>
-            <button>Read More</button>
+            <button>Узнать больше</button>
           </div>
         </div>
         <div className={styles.image}>
-          <img src={doctor} alt='doctor' />
+          <img src={man} alt='man' />
         </div>
       </div>
     </div>

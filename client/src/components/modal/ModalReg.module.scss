@@ -1,6 +1,27 @@
 $main-color: #565acf;
 $dark-main-color: #1f2278;
 $hover-color: #f17732;
+@keyframes slide-in {
+    0% {
+      opacity: 0;
+      transform: translateY(-100vh);
+    }
+    100% {
+      opacity: 1;
+      height: 420px;
+      transform: translateY(0);
+    }
+  }
+  @keyframes slide-inError {
+    0% {
+      opacity: 0;
+      transform: translateY(-100vh);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
 .modalWrapper {
     display: flex;
@@ -22,29 +43,30 @@ $hover-color: #f17732;
   
     .modalWindow {
       width: 500px;
-      height: 0;
-      overflow: hidden;
-      opacity: 0;
+      height: 400px;
+      
       
       border-radius: 50px;
       background-color: white;
      
   
       animation: slide-in 0.5s ease forwards;
+
+      
     }
-  
-    @keyframes slide-in {
-      0% {
-        opacity: 0;
-        transform: translateY(-100vh);
-      }
-      100% {
-        opacity: 1;
-        height: 420px;
-        transform: translateY(0);
-      }
-    }
-  }
+}
+.ModalWindowReg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 500px;
+    height: 420px;
+ 
+    background-color: white;
+}
+
 .enterWrapper {
     display: flex;
     align-items: center;
@@ -73,16 +95,7 @@ $hover-color: #f17732;
         width: 34px;
         height: 34px;
     }
-
-    
 }
-
-input::placeholder {color: #000000;}
-input::-webkit-input-placeholder {color: #000000;}
-input::-ms-input-placeholder {color: #000000;}
-input:-moz-placeholder {color: #000000;opacity: 1;}
-input::-moz-placeholder {color: #000000;opacity: 1;}
-input:-ms-input-placeholder {color: #000000;}
 
 .btnsAuth {
     display: flex;
@@ -119,15 +132,12 @@ input:-ms-input-placeholder {color: #000000;}
         
         transition: 0.5s ease-in-out;
 
-            &:focus {
-                width: 395px;
-                    
-            }
+           
     }
 
     button {
         margin-top: 35px;
-
+        
         width: 370px;
         height: 50px;
 
@@ -155,25 +165,19 @@ input:-ms-input-placeholder {color: #000000;}
                 background: lighten($color: $hover-color, $amount: 5%);
             }
     }
-    .errors {
-        color: red;
-        
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
-
-        margin-top: 10px;
-    }
 }
 
-.bottomModalItems {
+.errorAlert {
+    animation: slide-inError 0.3s ease forwards;
+    margin: 0 auto;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    background-color: white;
     display: flex;
-    align-items: center;
     justify-content: center;
-    span {
-        cursor: pointer;
-        text-decoration: underline;
-        margin-left: 20px;
-    }
+    align-items: center;
+    flex-direction: column;
+    border-radius: 0px 0px 10px 10px;
+    padding: 15px
 }
