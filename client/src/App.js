@@ -1,34 +1,30 @@
-import React, { useState } from 'react'
-import './App.css';
-import jwtDecode from 'jwt-decode'
+import React, { useState } from "react"
+import "./App.css"
+import jwtDecode from "jwt-decode"
+import logout from "./components/functions/logout"
 
-import MainHeader from './components/header/MainHeader';
-import ModalWindow from './components/modal/ModalWindow';
-
+import MainHeader from "./components/header/MainHeader"
+import ModalWindow from "./components/modal/ModalWindow"
+import CTAblock from "./components/body/CTAblock/CTAblock"
 
 let logUser
-
 if (localStorage.token) {
-  let jwt = localStorage.getItem('token')
+  let jwt = localStorage.getItem("token")
   logUser = jwtDecode(jwt)
-  console.log(logUser)
 }
 
 function App() {
-  const [modalOpened, setModalOpened] = useState(false);
-  let [user, setUser] = useState(logUser);
-
-
-  
-  console.log(user)
-
+  const [modalOpened, setModalOpened] = useState(false)
+  let auth = localStorage.getItem("token")
   return (
     <div className='wrapper'>
-      <MainHeader user={logUser} onClickModal={() => setModalOpened(true)}/>
-      {modalOpened && <ModalWindow onCloseModal={() => setModalOpened(false)}/>}
-      
+      <MainHeader auth={auth} onClickModal={() => setModalOpened(true)} />
+      {modalOpened && (
+        <ModalWindow onCloseModal={() => setModalOpened(false)} />
+      )}
+      <CTAblock />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
