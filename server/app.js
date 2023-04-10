@@ -12,9 +12,12 @@ const queryRouters = require('./Routers/queryRouters')
 const categoryRouters = require('./Routers/categoryRouters')
 
 app.use('/api/auth', authRouters)
-//app.use('/api/query', queryRouters)
+app.use('/api/query', queryRouters)
 app.use('/api/category', categoryRouters)
 
 
 
 module.exports = app
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());

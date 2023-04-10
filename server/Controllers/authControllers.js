@@ -3,6 +3,8 @@ const User = require('../Models/User')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+
+
 const SECRET_KEY = process.env.SECRET_KEY 
 
 module.exports = {
@@ -67,8 +69,6 @@ module.exports = {
     test: async (req, res) => {
         const email = req.body.email
         const password = req.body.password
-        res.status(202).json({
-            message: "Пошёл нахуй отсюда далбаёб ебучий тебе вообще здесь нехуй делать ебанат иди работай на стройку и не еби себе и другим людям мозги гений ты блять хуев, ебанат кончннный, да я в рот ебал тебя и всю твою семью, гори нахуй в аду, уебище ты блять недоделанное"
-        })
+        res.status(202).json(req.headers.authorization)
     }
 }
