@@ -1,7 +1,6 @@
 import { React, useState } from "react";
 import { Link } from 'react-router-dom';
 
-
 import ErrorAlert from "../UI/ErrorAlert/ErrorAlert";
 
 import styles from "./Header.module.scss";
@@ -21,14 +20,16 @@ export const MainHeader = (props) => {
   return (
     <header>
       <div className={styles.headerWrapper}>
+      <Link to="/">
         <div className={styles.leftItems}>
-          <img src={logo} alt="logo" />
-          <p>WorkHero</p>
+            <img src={logo} alt="logo" />
+            <p>WorkHero</p>
         </div>
+      </Link>
 
         {props.auth && (
           <div className={styles.headerBtns}>
-            <Link to="/order">
+            <Link to="/query">
               <p>Создать заказ</p>
             </Link>
               <p>Найти специалиста</p>

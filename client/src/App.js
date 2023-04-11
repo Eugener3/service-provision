@@ -6,19 +6,15 @@ import "./App.css"
 
 import Home from "./components/body/Home/Home"
 
-import CreateOrder from "./components/body/Order/CreateOrder";
-
+import CreateQuery from "./components/body/Query/CreateQuery";
 
 function App() {
   
-
   return (
-
     <Routes>
-      <Route path="/order" element={<CreateOrder/>} />
+      <Route path="/query" element={<CreateQuery/>} />
       <Route exact path="/" element={<Home/>} />
     </Routes>
-
   )
 }
 

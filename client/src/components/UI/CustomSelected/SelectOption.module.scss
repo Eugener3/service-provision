@@ -1,0 +1,27 @@
+$main-color: #565acf;
+$dark-main-color: #1f2278;
+$hover-color: #f17732;
+
+select {
+    margin-top: 20px;
+    padding-left: 20px;
+    padding-right: 40px;
+
+    height: 60px;
+    width:500px;
+
+    border: 1px solid rgba(86, 90, 207, 0.3);
+    border-radius: 8px;
+
+    font-weight: 600;
+    font-size: 18px;
+
+    background-color: white;
+
+    color: $main-color;
+
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    
+}

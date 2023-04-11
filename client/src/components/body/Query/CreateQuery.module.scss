@@ -1,0 +1,152 @@
+$main-color: #565acf;
+$dark-main-color: #1f2278;
+$hover-color: #f17732;
+
+input::placeholder {color: $main-color;}
+input::-webkit-input-placeholder {color: $main-color;}
+input::-ms-input-placeholder {color: $main-color;}
+input:-moz-placeholder {color: $main-color;opacity: 1;}
+input::-moz-placeholder {color: $main-color;opacity: 1;}
+input:-ms-input-placeholder {color: $main-color;}
+
+
+.createQueryWrap {
+    background-image: url("../../../img/backgrounds/background_query.jpg");
+    height: 900px;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    padding-top: 40px;
+
+    a {
+        text-decoration: none;
+    }
+
+    h6 {
+        font-weight: 700;
+        font-size: 60px;
+        font-family: "Montserrat",sans-serif;
+
+        color: $dark-main-color;
+    }
+    .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 180px;
+        height: 40px;
+
+        margin-top: 30px;
+
+        text-align: center;
+
+        box-shadow: 0 5px 30px 0 rgba(86,90,207,.3);
+
+        font-family: "Montserrat",sans-serif;
+
+        border-radius: 10px;
+
+        background-color: $main-color;
+       
+        color: white;
+
+        transition: 0.5s ease-in-out;
+
+        text-decoration: none;
+
+        cursor: pointer;
+
+        &:hover {
+            background-color: $dark-main-color;
+        }
+
+        svg {
+            height: 1.5em;
+            width: 1.5em;
+            margin-right: 10px; 
+        }
+    }
+}
+
+.row {
+   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    max-width: 800px;
+    height: 600px;
+    
+    background-color: #fff;
+
+    box-shadow: 0 10px 60px 0 rgba(31,34,120,.1);
+    border-radius: 40px;
+
+    margin: 0 auto;
+    margin-top: 50px;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        
+        .firstInput {
+            margin-top: -10px;
+        }
+
+        input {
+            margin-top: 20px;
+
+            height: 60px;
+            width: 500px;
+
+            border: 1px solid rgba(86,90,207,.3);
+            border-radius: 8px; 
+
+            font-weight: 600;
+            font-size: 18px;
+
+            color: $main-color;
+
+            padding-left: 20px;
+          }
+
+        p {
+            margin: 15px 0 0 20px;
+            
+            font-weight: 600;
+            font-size: 18px;
+
+            color: $dark-main-color;
+        }
+
+
+          div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            margin: 0 auto;
+
+                
+                input {
+                    margin-top: 2px;
+                    width: 240px;
+                }
+
+                .lastInput {
+                    margin-left: 20px;
+                }
+          }
+    }
+        
+
+
+    
+}
