@@ -82,8 +82,6 @@ module.exports = {
         try {
             const candidate = await Query.findById(req.params.id)
              if(candidate) {
-                const token = req.headers.authorization.split(' ')[1]
-                const decodedData = jwt.verify(token, secret)
                 const update =  {
                     title: req.body.title,
                     description: req.body.description,
@@ -108,6 +106,34 @@ module.exports = {
         } catch (error) {
             res.status(404).json({
                 message: "Заявка не найдена"
+            })
+        }
+    },
+    addResponded: async (req, res) => {
+        try {
+            const candidate = await Query.findById(req.params.id)
+             if(candidate) {
+                const token = req.headers.authorization.split(' ')[1]
+                const decodedData = jwt.verify(token, process.env.SECRET_KEY)
+                const update =  {
+                    $push: {responded: decodedData.idUser}
+                }
+                await Query.updateOne({_id: req.params.id}, update, {
+                    new: true
+                  })
+                res.status(200).json({
+                    message: "Уведомление оправлено"
+                })
+             }
+             else {
+                res.status(409).json({
+                    message: "Ошибка"
+                })
+             }
+        } catch (error) {
+            console.log(error)
+            res.status(409).json({
+                message: "Queries error"
             })
         }
     }

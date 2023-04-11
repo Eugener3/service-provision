@@ -10,5 +10,6 @@ router.get("/byuser/:id", passport.authenticate('jwt', {session: false}), queryC
 router.post("/", passport.authenticate('jwt', {session: false}), queryControllers.create)
 router.delete('/:id', passport.authenticate('jwt', {session: false}), queryControllers.delete)
 router.patch('/:id', passport.authenticate('jwt', {session: false}), queryControllers.update)
+router.patch('/responded/:id', passport.authenticate('jwt', {session: false}), queryControllers.addResponded)
 
 module.exports = router          

@@ -40,6 +40,61 @@ module.exports = {
         }
     },
     update: async (req, res) => {
-        
+        try {
+            const candidate = await User.findById(req.params.id)
+             if(candidate) {
+                const token = req.headers.authorization.split(' ')[1]
+                const decodedData = jwt.verify(token, secret)
+                const update =  {
+                    FIO: req.body.FIO,
+                    telephone: req.body.telephone,
+                    bio: req.body.bio
+                }
+                await Query.updateOne({_id: req.params.id}, update, {
+                    new: true
+                  })
+                res.status(200).json({
+                    message: "Заявка успешно изменена"
+                })
+             }
+             else {
+                res.status(409).json({
+                    message: "Ошибка"
+                })
+             }
+        } catch (error) {
+            res.status(404).json({
+                message: "Заявка не найдена"
+            })
+        }
+    },
+    changePassword: async (req, res) => {
+        try {
+            const candidate = await User.findById(req.params.id)
+             if(candidate) {
+                const token = req.headers.authorization.split(' ')[1]
+                const decodedData = jwt.verify(token, secret)
+                const update =  {
+                    FIO: req.body.FIO,
+                    telephone: req.body.telephone,
+                    bio: req.body.bio
+                }
+                await Query.updateOne({_id: req.params.id}, update, {
+                    new: true
+                  })
+                res.status(200).json({
+                    message: "Заявка успешно изменена"
+                })
+             }
+             else {
+                res.status(409).json({
+                    message: "Ошибка"
+                })
+             }
+        } catch (error) {
+            res.status(404).json({
+                message: "Заявка не найдена"
+            })
+        }
     }
 }

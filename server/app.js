@@ -14,11 +14,13 @@ const authRouters = require('./Routers/authRouters')
 const queryRouters = require('./Routers/queryRouters')
 const categoryRouters = require('./Routers/categoryRouters')
 const userRouters = require('./Routers/userRouters')
+const resumeRouters = require('./Routers/resumeRouters')
 
 app.use('/api/auth', authRouters)
 app.use('/api/query', queryRouters)
 app.use('/api/category', categoryRouters)
 app.use('/api/user', userRouters)
+app.use('/api/resume', resumeRouters)
 
 
 module.exports = app

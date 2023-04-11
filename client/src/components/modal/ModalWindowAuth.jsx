@@ -9,7 +9,7 @@ import { BsXLg } from "react-icons/bs";
 
 export const ModalWindow = (props) => {
 
-  const { register, handleSubmitRHF } = useForm();
+  // const { register, handleSubmitRHF } = useForm();
 
   
   let [errorAlert, setErrorAlert] = useState();
@@ -103,7 +103,7 @@ export const ModalWindow = (props) => {
           <BsXLg style={{ cursor: "pointer" }} onClick={props.onCloseModal} />
         </div>
 
-        <form onSubmit={handleSubmitRHF(handleSubmit)} className={styles.btnsAuth} method="POST">
+        <form onSubmit={/*handleSubmitRHF*/(handleSubmit)} className={styles.btnsAuth} method="POST">
           {loginDirty && loginError && (
             <div className={styles.errors}>{loginError}</div>
           )}

@@ -10,7 +10,17 @@ module.exports = {
             res.status(409).json(error)
         }
     },
-    getByIdUser: async (req, res) => {
+    getById: async (req, res) => {
+        try {
+            const candidate = await Query.findById(req.params.id)
+                res.status(200).json(candidate)
+        } catch (error) {
+            res.status(404).json({
+                message: "Заявка не найдена"
+            })
+        }
+    },
+    getByUser: async (req, res) => {
         try {
             const token = req.headers.authorization.split(' ')[1]
             const decodedData = jwt.verify(token, secret)
@@ -26,14 +36,6 @@ module.exports = {
     getByCategory: async (req, res) => {
         try {
             const candidate = await Resume.find({refCategory: req.params.id})
-            res.status(200).json(candidate)
-        } catch (error) {
-            res.status(409).json(error)
-        }
-    },
-    getByUser: async (req, res) => {
-        try {
-            const candidate = await Resume.find({refUser: req.params.id})
             res.status(200).json(candidate)
         } catch (error) {
             res.status(409).json(error)

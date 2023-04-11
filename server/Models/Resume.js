@@ -32,6 +32,10 @@ const resumeSchema = new Schema({
         type: String,
         ref: "categories",
         required: true
+    }],
+    reviews: [{
+        type: String,
+        ref: "reviews"
     }]
 })
 
