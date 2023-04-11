@@ -12,6 +12,8 @@ import SelectOption from "../../UI/CustomSelected/SelectOption";
 import { BiHome } from "react-icons/bi";
 import DateInput from "../../UI/CustomDateInput/DateInput";
 
+const headers = { Authorization: localStorage.getItem('token') };
+
 export const CreateQuery = () => {
   const [queryDetails, setqueryDetails] = useState({
     title: "",
@@ -34,16 +36,16 @@ export const CreateQuery = () => {
     e.preventDefault();
     try {
       const {data} = await axios
-            .post("http://localhost:3001/api/query", queryDetails)
+            .post("http://localhost:3001/api/query", queryDetails, {headers})
             .then((res) => {
               // setSuccesAlert(res.data.message);
-
+              console.log('nice')
             })
     
     
         } catch (error) {
           // setErrorAlert(error.response.data.message);
-          console.error(error.response)
+          console.error(error)
         }
   };
 

@@ -37,7 +37,9 @@ export const ModalWindowReg = (props) => {
       setErrorAlert(error.response.data.message);
     }
   };
-
+// ТУТ ЭРОР ПОКАЗЫВАЕТСЯ props={меседж}
+// ТУТ КУЛ ПОКАЗЫВАЕТСЯ
+// ТУТ МЕСЕДЖ ПОКАЗЫВАЕТСЯ
   return (
     <div className={styles.modalWrapper}>
       {errorAlert && (
