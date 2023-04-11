@@ -18,9 +18,10 @@ module.exports = {
                 res.status(200).json(candidate)
             }
             else {
-                res.status(404).json({
-                    message: "Пользователь не найден"
-                })
+                console.log(error)
+                res.status(409).json({
+                message: "Ошибка при поиске юзера"
+            })
             }
         } catch (error) {
             res.status(409).json(error)
@@ -34,9 +35,10 @@ module.exports = {
                     message: "Пользователь успешно удален"
                 })
         } catch (error) {
-            res.status(404).json({
-                message: "Пользователь не найден"
-            })   
+            console.log(error)
+            res.status(409).json({
+                message: "Ошибка при удалении юзера"
+            }) 
         }
     },
     update: async (req, res) => {
