@@ -9,28 +9,37 @@ const SECRET_KEY = process.env.SECRET_KEY
 
 module.exports = {
     login: async (req, res) => {
-        const candidate = await User.findOne({email: req.body.email})
-        if(candidate) {
-            if(await bcrypt.compare(req.body.password, candidate.password)) {
-                const token = jwt.sign({
-                    email: candidate.email,
-                    login: candidate.login,
-                    idUser: candidate._id 
-                }, SECRET_KEY, {expiresIn: '7d'})
-                
-                res.status(200).json(`Bearer ${token}`)
+        try {
+            const candidate = await User.findOne({email: req.body.email})
+            if(candidate) {
+                if(await bcrypt.compare(req.body.password, candidate.password)) {
+                    const token = jwt.sign({
+                        email: candidate.email,
+                        login: candidate.login,
+                        idUser: candidate._id 
+                    }, SECRET_KEY, {expiresIn: '7d'})
+                    
+                    res.status(200).json(`Bearer ${token}`)
+                }
+                else {
+                    res.status(409).json({
+                        message: "Пароль введён неверно"
+                    })
+                }
             }
-            else {
+            else{
                 res.status(409).json({
-                    message: "Пароль введён неверно"
+                    message: "Пользователя с такой почтой не существует"
                 })
             }
+        } catch (error) {
+                console.log(error)
+                res.status(409).json({
+                    message: "Ошибка при авторизации"
+                })
+            
         }
-        else{
-            res.status(409).json({
-                message: "Пользователя с такой почтой не существует"
-            })
-        }
+
     },
     register: async (req, res) => {
         try {
@@ -60,8 +69,9 @@ module.exports = {
                         })
             }
         } catch (error) {
+            console.log(error)
             res.status(409).json({
-                message: error
+                message: "Ошибка при регистрации"
             })
         }
 
