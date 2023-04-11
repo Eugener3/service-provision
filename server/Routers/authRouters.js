@@ -14,4 +14,5 @@ router.post('/register', [
     check('password', "Поле пароль не заполнено").notEmpty(),
 ], unauth.valid, authControllers.register)
 
-module.exports = router
+
+module.exports = router 

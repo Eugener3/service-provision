@@ -51,12 +51,7 @@ module.exports = {
             if (!validErrors.isEmpty()) {
                 return res.status(400).json({message: validErrors.errors[0].msg})
             }
-            if(await User.findOne({email: req.body.email})) {
-                res.status(409).json({
-                    message: "Пользователь с такой почтой уже существует"
-                })
-            }
-            else if (await User.findOne({login: req.body.login})) {
+            if (await User.findOne({login: req.body.login})) {
                 res.status(409).json({
                     message: "Пользователь с таким логином уже существует"
                 })
@@ -66,7 +61,7 @@ module.exports = {
                     const password = req.body.password
                     const user = new User({
                         login: req.body.login,
-                        password: await bcrypt.hash(password, salt),
+                        password: await bcrypt.hash(password, salt)
                     })
                         user.save()
                         res.status(200).json({
@@ -79,6 +74,5 @@ module.exports = {
                 message: "Ошибка при регистрации"
             })
         }
-
     }
 }
