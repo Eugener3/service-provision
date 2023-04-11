@@ -1,4 +1,5 @@
 const Query = require('../Models/Query')
+const jwt = require("jsonwebtoken")
 
 module.exports = {
     getAll: async (req, res) => {

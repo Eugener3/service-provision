@@ -1,13 +1,14 @@
 const express = require('express')
 const router = express.Router()
 const queryControllers = require('../Controllers/queryControllers')
+const passport = require('passport')
 
-router.get("/", queryControllers.getAll)
-router.get("/:id", queryControllers.getById)
-router.get("/bycategory/:id", queryControllers.getByCategory)
-router.get("/byuser/:id", queryControllers.getByUser)
-router.post("/newCandidate", queryControllers.create)
-router.delete('/:id', queryControllers.delete)
-router.patch('/:id', queryControllers.update)
+router.get("/", passport.authenticate('jwt', {session: false}),queryControllers.getAll)
+router.get("/:id", passport.authenticate('jwt', {session: false}), queryControllers.getById)
+router.get("/bycategory/:id", passport.authenticate('jwt', {session: false}), queryControllers.getByCategory)
+router.get("/byuser/:id", passport.authenticate('jwt', {session: false}), queryControllers.getByUser)
+router.post("/newCandidate", passport.authenticate('jwt', {session: false}), queryControllers.create)
+router.delete('/:id', passport.authenticate('jwt', {session: false}), queryControllers.delete)
+router.patch('/:id', passport.authenticate('jwt', {session: false}), queryControllers.update)
 
 module.exports = router

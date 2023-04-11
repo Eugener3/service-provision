@@ -2,10 +2,13 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const app = express()
+const passport = require('passport')
 
 app.use(express.json())
 app.use(morgan('dev'))
 app.use(cors())
+app.use(passport.initialize())
+require('./middlewares/passport')(passport)
 
 const authRouters = require('./Routers/authRouters')
 const queryRouters = require('./Routers/queryRouters')
@@ -18,8 +21,4 @@ app.use('/api/category', categoryRouters)
 app.use('/api/user', userRouters)
 
 
-
 module.exports = app
-
-var bodyParser = require('body-parser');
-app.use(bodyParser.json());

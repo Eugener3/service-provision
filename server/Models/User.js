@@ -3,6 +3,11 @@ const {model} = require('mongoose')
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
+    login: {
+        type: String,
+        required: true,
+        unique: true
+    },
     email: {
         type: String,
         required: true,
@@ -11,15 +16,6 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
-    },
-    telephone: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    verify: {
-        type: Boolean,
-        default: false
     }
 })
 

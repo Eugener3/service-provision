@@ -14,7 +14,7 @@ module.exports = {
             if(await bcrypt.compare(req.body.password, candidate.password)) {
                 const token = jwt.sign({
                     email: candidate.email,
-                    telephone: candidate.telephone,
+                    login: candidate.login,
                     idUser: candidate._id 
                 }, SECRET_KEY, {expiresIn: '7d'})
                 
@@ -35,23 +35,29 @@ module.exports = {
     register: async (req, res) => {
         try {
             const candidate = await User.findOne({email: req.body.email})
+            const logCandidate = await User.findOne({login: req.body.login})
             if(candidate) {
                 res.status(409).json({
                     message: "Пользователь с такой почтой уже существует"
                 })
             }
-            else {
-                const salt = await bcrypt.genSalt(10)
-                const password = req.body.password
-                const user = new User({
-                    email: req.body.email,
-                    password: await bcrypt.hash(password, salt),
-                    telephone: req.body.telephone
+            else if (logCandidate) {
+                res.status(409).json({
+                    message: "Пользователь с таким логином уже существует"
                 })
-                    user.save()
-                    res.status(200).json({
-                        message: "Регистрация прошла успешно"
+            }
+            else {
+                    const salt = await bcrypt.genSalt(10)
+                    const password = req.body.password
+                    const user = new User({
+                        login: req.body.login,
+                        email: req.body.email,
+                        password: await bcrypt.hash(password, salt),
                     })
+                        user.save()
+                        res.status(200).json({
+                            message: "Регистрация прошла успешно"
+                        })
             }
         } catch (error) {
             res.status(409).json({
