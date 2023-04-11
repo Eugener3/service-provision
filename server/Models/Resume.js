@@ -30,7 +30,8 @@ const resumeSchema = new Schema({
     },
     refCategory: [{
         type: String,
-        ref: "categories"
+        ref: "categories",
+        required: true
     }]
 })
 

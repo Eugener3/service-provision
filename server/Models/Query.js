@@ -16,7 +16,11 @@ const querySchema = new Schema({
         type: String,
         required: true
     },
-    price: {
+    priceOf: {
+        type: String,
+        required: true
+    },
+    priceAf: {
         type: String,
         required: true
     },

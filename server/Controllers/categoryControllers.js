@@ -8,7 +8,10 @@ module.exports = {
             const candidate = await Category.find()
             res.status(200).json(candidate)
         } catch (error) {
-            res.status(409).json(error)
+            console.log(error)
+            res.status(409).json({
+                message: "Categories error"
+            })
         }
     },
     getById: async  (req, res) => {
@@ -23,7 +26,10 @@ module.exports = {
                 })
             }
         } catch (error) {
-            res.status(409).json(error)
+            console.log(error)
+            res.status(409).json({
+                message: "Categories error"
+            })
         }
 
     },
@@ -45,13 +51,17 @@ module.exports = {
                 })
             }
         } catch (error) {
-            res.status(409).json(error)
+            console.log(error)
+            res.status(409).json({
+                message: "Categories error"
+            })
         }
     },
     delete: async (req, res) => {
         try {
-            const candidate = Category.findById(req.params.id)
+            const candidate = await Category.findById(req.params.id)
             if(candidate) {
+                console.log(candidate.nameCategory)
                 await Category.findByIdAndDelete(req.params.id)
                 res.status(200).json({
                     message: "Категория успешно удалена"
@@ -59,16 +69,20 @@ module.exports = {
             }
             else {
                 res.status(404).json({
-                    message: "Категория не найдена"
+                    message: "Категория не найдена",
                 })
             }
+           console.log(candidate) 
         } catch (error) {
-            res.status(404).json(error)   
+            console.log(error)
+            res.status(409).json({
+                message: "Categories error"
+            })
         }
     },
     update: async (req, res) => {
         try {
-            const candidate = Category.findById(req.params.id)
+            const candidate = await Category.findById(req.params.id)
             if(candidate) {
                 await Category.updateOne({_id: req.params.id}, {$set: {nameCategory: req.body.nameCategory}})
                 res.status(200).json({
@@ -81,7 +95,10 @@ module.exports = {
                 })
             }
         } catch (error) {
-            res.status(404).json(error) 
+            console.log(error)
+            res.status(409).json({
+                message: "Categories error"
+            })
         }
 
     }

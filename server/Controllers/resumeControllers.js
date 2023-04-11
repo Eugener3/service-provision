@@ -19,7 +19,7 @@ module.exports = {
 
         } catch (error) {
             res.status(404).json({
-                message: "Заявка не найдена"
+                message: "Резюме не найдено"
             })
         }
     },
@@ -62,7 +62,7 @@ module.exports = {
                 })
                 await query.save()
                 res.status(200).json({
-                    message: "Заявка успешно добавлена"
+                    message: "Резюме успешно создано"
                 })
             }
         } catch (error) {
@@ -71,21 +71,21 @@ module.exports = {
     },
     delete: async (req, res) => {
         try {
-            const candidate = await Query.findById(req.params.id)
+            const candidate = await Resume.findOne({refUser: decodedData.idUser})
                 await candidate.deleteOne({_id: req.params.id})
                 res.status(200).json({
-                    message: "Заявка успешно удалена"
+                    message: "Резюме успешно удалено"
                 })
 
         } catch (error) {
             res.status(404).json({
-                message: "Заявка не найдена"
+                message: "Резюме не найдено"
             })
         }
     },
     update: async (req, res) => {
         try {
-            const candidate = await Resume.findById(req.params.id)
+            const candidate = await Resume.findOne({_id: req.params.id})
              if(candidate) {
                 const token = req.headers.authorization.split(' ')[1]
                 const decodedData = jwt.verify(token, secret)
@@ -97,11 +97,11 @@ module.exports = {
                     description: req.body.description,
                     // refCategory: [userRole.value] РОДИОН ТЫ ГДЕ БЛЯТЬ
                 }
-                await Query.updateOne({_id: req.params.id}, update, {
+                await Resume.updateOne({_id: req.params.id}, update, {
                     new: true
                   })
                 res.status(200).json({
-                    message: "Заявка успешно изменена"
+                    message: "Резюме успешно изменено"
                 })
              }
              else {
@@ -111,7 +111,7 @@ module.exports = {
              }
         } catch (error) {
             res.status(404).json({
-                message: "Заявка не найдена"
+                message: "Резюме не найдено"
             })
         }
     }
