@@ -8,7 +8,7 @@ import styles from "./Header.module.scss";
 import logo from "../../img/logo.svg";
 
 import { BsSearch, BsCaretRightFill } from "react-icons/bs";
-import { BiUserPlus } from "react-icons/bi";
+import { BiUserPlus, BiUserCircle } from "react-icons/bi";
 import { ImExit } from "react-icons/im";
 
 import logout from "../functions/logout";
@@ -16,26 +16,26 @@ import logout from "../functions/logout";
 import ModalWindowReg from "../modal/ModalWindowReg";
 
 export const MainHeader = (props) => {
-  let authToken = localStorage.getItem("token");;
-  const [auth, setAuth] = useState(false);;
+  let authToken = localStorage.getItem("token");
+  const [auth, setAuth] = useState(false);
 
-    useEffect(() => {
-      if (authToken) {
-        setAuth(true);;
-      } else {
-        setAuth(false);;
-      }
+  useEffect(() => {
+    if (authToken) {
+      setAuth(true);
+    } else {
+      setAuth(false);
+    }
   }, [, authToken]);
 
   return (
     <header>
       <div className={styles.headerWrapper}>
-          <Link to="/">
-            <div className={styles.leftItems}>
+        <Link to="/">
+          <div className={styles.leftItems}>
             <img src={logo} alt="logo" />
             <p>WorkHero</p>
-            </div>
-          </Link>
+          </div>
+        </Link>
 
         {auth && (
           <div className={styles.headerBtns}>
@@ -43,7 +43,9 @@ export const MainHeader = (props) => {
               <p>Создать заказ</p>
             </Link>
             <p>Найти специалиста</p>
-            <p>Мои заказы</p>
+            <Link to="/info">
+              <p>Мои заказы</p>
+            </Link>
             <p>Стать исполнителем</p>
           </div>
         )}
@@ -89,13 +91,21 @@ export const MainHeader = (props) => {
           )}
           {auth && (
             <div className={styles.loginBtn}>
-              <button className={styles.btnLogin} onClick={() => logout()}>
-                <p>ВЫЙТИ</p>
-                <div className={styles.insideBtn}>
-                  <ImExit size="1.3em" fill="#565acf" />
-                </div>
-              </button>
-            </div>
+              <div className={styles.rightButtons}>
+                <button className={styles.btnLogin} >
+                  <p>ПРОФИЛЬ</p>
+                  <div className={styles.insideBtn}>
+                    <BiUserCircle size="2em" fill="#565acf" />
+                  </div>
+                </button>
+                <button className={styles.btnLogout} onClick={() => logout()}>
+                  <div className={styles.insideBtn}>
+                    <ImExit size="1.3em" fill="#565acf" />
+                  </div>
+                </button>
+              </div>
+              </div>
+            
           )}
         </div>
       </div>

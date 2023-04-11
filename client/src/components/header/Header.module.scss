@@ -135,3 +135,60 @@ header {
   margin-right: 50px;
   
 }
+
+
+.btnLogout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+
+  
+  border: none;
+  background-color: $main-color;
+
+  border-radius: 8px;
+  border-width: 2px;
+
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 13px;
+
+  transition: all 0.5s;
+
+
+  cursor: pointer;
+
+  color: white;
+
+  &:hover {
+    background: darken($color: $main-color, $amount: 5%);
+    box-shadow: 0 5px 20px 0 rgba(86,90,207,.3) !important;
+  }
+  &:active {
+    background: lighten($color: $main-color, $amount: 10%);
+  }
+  p {
+    width: 120px;
+  }
+
+  .insideBtn {
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    
+  }
+}
+
+.rightButtons {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}

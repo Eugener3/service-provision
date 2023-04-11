@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useForm } from 'react-hook-form';
 
 import styles from "./ModalAuth.module.scss";
 import ErrorAlert from "../UI/ErrorAlert/ErrorAlert";
@@ -7,6 +8,10 @@ import ErrorAlert from "../UI/ErrorAlert/ErrorAlert";
 import { BsXLg } from "react-icons/bs";
 
 export const ModalWindow = (props) => {
+
+  const { register, handleSubmitRHF } = useForm();
+
+  
   let [errorAlert, setErrorAlert] = useState();
   const [login, setLogin] = useState("");
 
@@ -98,7 +103,7 @@ export const ModalWindow = (props) => {
           <BsXLg style={{ cursor: "pointer" }} onClick={props.onCloseModal} />
         </div>
 
-        <form onSubmit={handleSubmit} className={styles.btnsAuth} method="POST">
+        <form onSubmit={handleSubmitRHF(handleSubmit)} className={styles.btnsAuth} method="POST">
           {loginDirty && loginError && (
             <div className={styles.errors}>{loginError}</div>
           )}

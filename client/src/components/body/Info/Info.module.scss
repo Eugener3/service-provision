@@ -1,0 +1,99 @@
+$main-color: #565acf;
+$dark-main-color: #1f2278;
+$hover-color: #f17732;
+
+input::placeholder {color: $main-color;}
+input::-webkit-input-placeholder {color: $main-color;}
+input::-ms-input-placeholder {color: $main-color;}
+input:-moz-placeholder {color: $main-color;opacity: 1;}
+input::-moz-placeholder {color: $main-color;opacity: 1;}
+input:-ms-input-placeholder {color: $main-color;}
+
+textarea::placeholder {color: $main-color;}
+textarea::-webkit-input-placeholder {color: $main-color;}
+textarea::-ms-input-placeholder {color: $main-color;}
+textarea:-moz-placeholder {color: $main-color;opacity: 1;}
+textarea::-moz-placeholder {color: $main-color;opacity: 1;}
+textarea:-ms-input-placeholder {color: $main-color;}
+
+.infoWrapp {
+background-image: url("../../../img/backgrounds/background_query.jpg");
+height: 950px;
+}
+
+.infoRow {
+    max-width: 900px;
+    height: 650px;
+    
+    background-color: #fff;
+
+    box-shadow: 0 10px 60px 0 rgba(31,34,120,.1);
+    border-radius: 40px;
+
+    margin: 0 auto;
+    margin-top: 50px;
+
+    .itemsWrapp {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        width: 100%;
+        height: 110px;
+
+        border-bottom: 2px solid black;
+        
+        .btnProfile {
+            background-color: $hover-color;
+        }                                         
+
+        button {
+            width: 240px;
+            height: 50px;
+        
+            margin: 0 auto;
+
+            text-align: center;
+        
+            box-shadow: 0 5px 30px 0 rgba(86,90,207,.3);
+        
+            font-family: "Montserrat",sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            
+            border: none;
+            border-radius: 10px;
+        
+            background-color: $main-color;
+        
+            color: white;
+        
+            transition: 0.5s ease-in-out;
+        
+            text-decoration: none;
+        
+            cursor: pointer;
+
+            &:hover {
+                background-color: $dark-main-color;
+            }
+        }
+    }             
+}
+
+
+
+
+ // p {
+        //     font-size: 24px;
+        //     font-weight: 600;
+        
+        //     border-width: 0 0 0 1px;
+        
+        //     line-height: 1;
+            
+        //     text-align: center;
+        //     padding-top: 10px;
+
+        //     color: $dark-main-color;     
+        // } 

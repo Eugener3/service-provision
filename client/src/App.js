@@ -7,12 +7,15 @@ import "./App.css"
 import Home from "./components/body/Home/Home"
 
 import CreateQuery from "./components/body/Query/CreateQuery";
+import Profile from "./components/body/Info/Profile/Profile";
+import Info from "./components/body/Info/Info";
 
 function App() {
   
   return (
     <Routes>
-      <Route path="/query" element={<CreateQuery/>} />
+      <Route path="/info" element={<Info/>} />
+      <Route path="/profile" element={<Profile/>}/>
       <Route exact path="/" element={<Home/>} />
     </Routes>
   )
