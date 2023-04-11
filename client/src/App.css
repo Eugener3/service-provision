@@ -39,7 +39,7 @@
 
 
 .input__wrapper {
-  width: 270px;
+  width: 310px;
   height: 75px;
 }
 
@@ -67,7 +67,7 @@
 }
  
 .input__file-button {
-  width: 270px;
+  width: 310px;
   height: 50px;
   background: #565acf;
   color: #fff;
