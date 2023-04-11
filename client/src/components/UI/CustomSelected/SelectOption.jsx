@@ -1,12 +1,11 @@
-import React, { useState, useEffect }  from "react";
+import React, { useState, useEffect, useContext }  from "react";
 import styles from "./SelectOption.module.scss";
 import axios from "axios";
+import { ContextCategory } from "../../../utils/Context/ContextCategory";
 
-//
-// console.log(options)
 
-export const SelectOption = ({ selected }) => {
-  const [selectedOption, setSelectedOption] = useState("");
+export const SelectOption = () => {
+  const { selectedOption, setSelectedOption } = useContext(ContextCategory);
   const [categories, setCategories] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -16,17 +15,12 @@ export const SelectOption = ({ selected }) => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    console.log(selectedOption); //Юде передавать SelectedOption!!!!
-    // selected(selectedOption)
-  }, [selectedOption]);
-
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
   };
 
   return (
-    <>
+    
       <select value={selectedOption} onChange={handleChange}>
         <option value="" disabled>
           Выберите категорию
@@ -37,7 +31,7 @@ export const SelectOption = ({ selected }) => {
           </option>
         ))}
       </select>
-    </>
+
   );
 };
 export default SelectOption;

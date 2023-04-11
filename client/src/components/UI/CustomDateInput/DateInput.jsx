@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { ContextCategory } from "../../../utils/Context/ContextCategory";
 
 const DateInput = () => {
-  const [date, setDate] = useState("");
+  const {date, setDate} = useContext(ContextCategory);
 
   const handleDateChange = (e) => {
     const inputDate = e.target.value;

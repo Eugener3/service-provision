@@ -1,6 +1,8 @@
-import React, { useState, createContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { ContextCategory } from "../../../utils/Context/ContextCategory";
 
+// let [selectedValue, setSelectedValue] = useState()
 import styles from "./CreateQuery.module.scss";
 
 import MainHeader from "../../header/MainHeader";
@@ -10,14 +12,14 @@ import { BiHome } from "react-icons/bi";
 import DateInput from "../../UI/CustomDateInput/DateInput";
 
 export const CreateQuery = () => {
-  let Context = createContext();
-
   const [queryDetails, setqueryDetails] = useState({
     title: "",
     description: "",
-    data: "",
+    place: "",
+    deadline: "",
     priceOf: "",
     priceAf: "",
+    category: "",
   });
 
   const handleChange = (e) => {
@@ -26,15 +28,29 @@ export const CreateQuery = () => {
       return { ...prev, [name]: value };
     });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       console.log(queryDetails);
-    } catch (error) {}
+    } catch (error) {
+      
+    }
   };
+  const [selectedOption, setSelectedOption] = useState("");
+  const [date, setDate] = useState("");
+
+  useEffect(() => {
+    setqueryDetails({ ...queryDetails, category: selectedOption });
+  }, [selectedOption]);
+  useEffect(() => {
+    setqueryDetails({ ...queryDetails, deadline: date });
+  }, [date]);
 
   return (
-    <Context.Provider>
+    <ContextCategory.Provider
+      value={{ selectedOption, setSelectedOption, date, setDate }}
+    >
       <div className={styles.wrapper}>
         <MainHeader />
         <div className={styles.createQueryWrap}>
@@ -64,6 +80,13 @@ export const CreateQuery = () => {
                 onChange={handleChange}
               />
 
+              <input
+                type="text"
+                name="place"
+                placeholder="Место (Город, дом, кв)"
+                onChange={handleChange}
+              />
+
               <DateInput />
               <p>Желаемая цена:</p>
               <div className={styles.priseInputs}>
@@ -73,7 +96,6 @@ export const CreateQuery = () => {
                   placeholder="От:"
                   onChange={handleChange}
                 />
-
                 <input
                   className={styles.lastInput}
                   name="priceAf"
@@ -90,7 +112,7 @@ export const CreateQuery = () => {
           </div>
         </div>
       </div>
-    </Context.Provider>
+    </ContextCategory.Provider>
   );
 };
 export default CreateQuery;
