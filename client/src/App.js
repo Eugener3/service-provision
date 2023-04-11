@@ -1,41 +1,24 @@
 import React, { useState } from "react"
+
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import "./App.css"
-import jwtDecode from "jwt-decode"
-import logout from "./components/functions/logout"
 
-import MainHeader from "./components/header/MainHeader"
-import ModalWindow from "./components/modal/ModalWindowAuth"
-import ModalWindowReg from "./components/modal/ModalWindowReg"
+import Home from "./components/body/Home/Home"
 
-import CTAblock from "./components/body/CTAblock/CTAblock"
-import AboutUS from "./components/body/AboutUS/AboutUS"
+import CreateOrder from "./components/body/Order/CreateOrder";
 
-let logUser
-if (localStorage.token) {
-  let jwt = localStorage.getItem("token")
-  logUser = jwtDecode(jwt)
-}
 
 function App() {
-  const [modalOpened, setModalOpened] = useState(false)
-  const [openModalReg, setOpenModalReg] = useState(false) 
   
-  let auth = localStorage.getItem("token")
-  return (
-    <div className='wrapper'>
-      <MainHeader auth={auth} onClickModal={() => setModalOpened(true)} onClickModalReg={() => setOpenModalReg(true)}/> 
-      {modalOpened && (
-        <ModalWindow onCloseModal={() => setModalOpened(false)} />
-      )}
-      {openModalReg && (
-        <ModalWindowReg  onCloseModal={() => setOpenModalReg(false)}/>
-      )}
-      <CTAblock />
 
-      
-      <AboutUS/>
-      <div style={{height:'3000px', backgroundColor: 'green'}}></div>
-    </div>
+  return (
+
+    <Routes>
+      <Route path="/order" element={<CreateOrder/>} />
+      <Route exact path="/" element={<Home/>} />
+    </Routes>
+
   )
 }
 
