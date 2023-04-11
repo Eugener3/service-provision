@@ -43,14 +43,27 @@ module.exports = {
     },
     register: async (req, res) => {
         try {
-            const candidate = await User.findOne({email: req.body.email})
-            const logCandidate = await User.findOne({login: req.body.login})
-            if(candidate) {
+            if(!req.body.email) {
+                res.status(404).json({
+                    message: "Поле почта не заполнено"
+                })
+            }
+            else if(!req.body.login) {
+                res.status(404).json({
+                    message: "Поле логин не заполнено"
+                })
+            }
+            else if(!req.body.password) {
+                res.status(404).json({
+                    message: "Поле пароль не заполнено"
+                })
+            }
+            else if(await User.findOne({email: req.body.email})) {
                 res.status(409).json({
                     message: "Пользователь с такой почтой уже существует"
                 })
             }
-            else if (logCandidate) {
+            else if (await User.findOne({login: req.body.login})) {
                 res.status(409).json({
                     message: "Пользователь с таким логином уже существует"
                 })

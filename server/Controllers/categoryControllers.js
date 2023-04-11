@@ -61,7 +61,6 @@ module.exports = {
         try {
             const candidate = await Category.findById(req.params.id)
             if(candidate) {
-                console.log(candidate.nameCategory)
                 await Category.findByIdAndDelete(req.params.id)
                 res.status(200).json({
                     message: "Категория успешно удалена"
