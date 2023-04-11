@@ -11,7 +11,6 @@ router.post('/login', [
 ], unauth.valid, authControllers.login)
 router.post('/register', [
     check('login', "Поле логин не заполнено").notEmpty(),
-    check('email', "Поле почта не заполнено").notEmpty(),
     check('password', "Поле пароль не заполнено").notEmpty(),
 ], unauth.valid, authControllers.register)
 
