@@ -23,18 +23,18 @@ export const ModalWindowReg = (props) => {
       return { ...prev, [name]: value };
     });
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios
+      const {data} = await axios
         .post("http://localhost:3001/api/auth/register", userDetails)
         .then((res) => {
           setSuccesAlert(res.data.message);
+          props.onCloseModal()
         })
-        .then(props.onCloseModal());
 
-      props.onCloseModal();
+
     } catch (error) {
       setErrorAlert(error.response.data.message);
     }
