@@ -1,4 +1,7 @@
 import { React, useState } from "react";
+import { Link } from 'react-router-dom';
+
+
 import ErrorAlert from "../UI/ErrorAlert/ErrorAlert";
 
 import styles from "./Header.module.scss";
@@ -13,6 +16,7 @@ import logout from "../functions/logout";
 
 import ModalWindowReg from "../modal/ModalWindowReg";
 
+
 export const MainHeader = (props) => {
   return (
     <header>
@@ -24,10 +28,13 @@ export const MainHeader = (props) => {
 
         {props.auth && (
           <div className={styles.headerBtns}>
-            <p>Создать заказ</p>
-            <p>Найти специалиста</p>
-            <p>Мои заказы</p>
-            <p>Стать исполнителем</p>
+            <Link to="/order">
+              <p>Создать заказ</p>
+            </Link>
+              <p>Найти специалиста</p>
+              <p>Мои заказы</p>
+              <p>Стать исполнителем</p>
+            
           </div>
         )}
 
