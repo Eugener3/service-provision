@@ -37,6 +37,8 @@ export const ModalWindowReg = (props) => {
     }
   };
 
+  
+
   return (
     <div className={styles.modalWrapper}>
       {errorAlert && (
