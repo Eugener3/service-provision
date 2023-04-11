@@ -8,7 +8,9 @@ const DateInput = () => {
     const [day, month, year] = inputDate.split('/');
     const dateObject = new Date(`${day}.${month}.${year}`).toLocaleDateString('sv');
     setDate(inputDate);
-    console.log(inputDate)               //ЮДЕ ОТПРАВЛЯТЬ InputDate!!!!!!!!!!!!!!!!!
+    
+    console.log(inputDate) //ЮДЕ ОТПРАВЛЯТЬ InputDate!!!!!!!!!!!!!!!!!
+                   
   };
 
   const handleDateBlur = (e) => {
@@ -27,6 +29,8 @@ const DateInput = () => {
     const inputDate = e.target.value;
     setDate(inputDate);
   };
+  
+  const today = new Date().toISOString().split("T")[0];
 
   return (
     <input 
@@ -37,6 +41,7 @@ const DateInput = () => {
         onFocus={handleInputFocus}
         onBlur={handleDateBlur}
         dir="auto"
+        min={today}
     />
   );
 };

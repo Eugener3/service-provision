@@ -1,5 +1,5 @@
-import { React, useState } from "react";
-import { Link } from 'react-router-dom';
+import { React, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import ErrorAlert from "../UI/ErrorAlert/ErrorAlert";
 
@@ -15,31 +15,40 @@ import logout from "../functions/logout";
 
 import ModalWindowReg from "../modal/ModalWindowReg";
 
-
 export const MainHeader = (props) => {
+  let authToken = localStorage.getItem("token");;
+  const [auth, setAuth] = useState(false);;
+
+    useEffect(() => {
+      if (authToken) {
+        setAuth(true);;
+      } else {
+        setAuth(false);;
+      }
+  }, [, authToken]);
+
   return (
     <header>
       <div className={styles.headerWrapper}>
-      <Link to="/">
-        <div className={styles.leftItems}>
+          <Link to="/">
+            <div className={styles.leftItems}>
             <img src={logo} alt="logo" />
             <p>WorkHero</p>
-        </div>
-      </Link>
+            </div>
+          </Link>
 
-        {props.auth && (
+        {auth && (
           <div className={styles.headerBtns}>
             <Link to="/query">
               <p>Создать заказ</p>
             </Link>
-              <p>Найти специалиста</p>
-              <p>Мои заказы</p>
-              <p>Стать исполнителем</p>
-            
+            <p>Найти специалиста</p>
+            <p>Мои заказы</p>
+            <p>Стать исполнителем</p>
           </div>
         )}
 
-        {!props.auth && (
+        {!auth && (
           <div
             className={styles.headerBtns}
             onClick={!props.auth && props.onClickModalReg}
@@ -52,7 +61,7 @@ export const MainHeader = (props) => {
         )}
 
         <div className={styles.rightItems}>
-          {!props.auth && (
+          {!auth && (
             <>
               <div className={styles.loginBtn}>
                 <button
@@ -78,7 +87,7 @@ export const MainHeader = (props) => {
               </div>
             </>
           )}
-          {props.auth && (
+          {auth && (
             <div className={styles.loginBtn}>
               <button className={styles.btnLogin} onClick={() => logout()}>
                 <p>ВЫЙТИ</p>

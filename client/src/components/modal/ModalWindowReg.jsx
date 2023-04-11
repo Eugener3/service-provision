@@ -12,6 +12,7 @@ export const ModalWindowReg = (props) => {
 
 
   const [userDetails, setUserDetails] = useState({
+    login:"",
     email: "",
     password: "",
     telephone:"",
@@ -62,6 +63,12 @@ export const ModalWindowReg = (props) => {
         </div>
         
         <form className={styles.btnsAuth} onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="login"
+            placeholder="Login"
+            onChange={handleChange}
+          />
           <input
             type="text"
             name="email"

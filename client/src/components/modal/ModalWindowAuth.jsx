@@ -9,13 +9,14 @@ import { BsXLg } from "react-icons/bs"
 
 export const ModalWindow = props => {
   let [errorAlert, setErrorAlert] = useState()
-  const [email, setEmail] = useState("")
+  const [login, setLogin] = useState("")
+
   const [password, setpassword] = useState("")
 
-  const [emailDirty, setEmailDirty] = useState(false) //При активации input значение - true
+  const [loginDirty, setLoginDirty] = useState(false) //При активации input значение - true
   const [passwordDirty, setPasswordDirty] = useState(false) //При активации input значение - true
 
-  const [emailError, setEmailError] = useState("Поле email не заполнено!")
+  const [loginError, setLoginError] = useState("Поле login не заполнено!")
   const [passwordError, setPasswordError] = useState(
     "Поле password не заполнено!"
   )
@@ -24,37 +25,34 @@ export const ModalWindow = props => {
 
   useEffect(() => {
     //Если какой-то элемент из массива изменяется, то функция из первого параметра будет вызываться
-    if (emailError || passwordError) {
+    if (loginError || passwordError) {
       //Если какая-то из ошибок не пуста
       setFormValid(false) //Форма не валидна
     } else {
       setFormValid(true) //Форма валидна
     }
-  }, [emailError, passwordError]) //Первый параметр - функция; Второй - массив зависимостей
+  }, [loginError, passwordError]) //Первый параметр - функция; Второй - массив зависимостей
 
   const blurHandler = e => {
     //Срабатывает тогда, когда пользователь убрал курсор из поля
     switch (e.target.name) {
-      case "email": //Если состояние == 'email', то для EmailDirty делаем true
-        setEmailDirty(true)
-        break
       case "password": //Если состояние == 'password', то для passwordDirty делаем true
         setPasswordDirty(true)
+        break
+      case "login": //Если состояние == 'password', то для passwordDirty делаем true
+        setLoginDirty(true)
         break
     }
   }
 
-  const emailHandler = e => {
-    setEmail(e.target.value) //Когда пользователь что-то вводит, состояние email меняется на то, которое вводит пользователь в
-
-    // eslint-disable-next-line
-    const re =
-    // eslint-disable-next-line
-      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-    if (!re.test(String(e.target.value).toLowerCase())) {
-      setEmailError("Неккоректный email")
-    } else {
-      setEmailError("")
+  const loginHandler = e => {
+    setLogin(e.target.value)
+    if (!e.target.value) {
+        //Если пароль пустой
+        setLoginError("Поле login не заполнено!")
+    }
+    else {
+      setLoginError("")
     }
   }
 
@@ -78,7 +76,7 @@ export const ModalWindow = props => {
         method: "post",
         url: "http://localhost:3001/api/auth/login",
         data: {
-          email: email,
+          login: login,
           password: password,
         },
       })
@@ -106,17 +104,17 @@ export const ModalWindow = props => {
         </div>
 
         <form onSubmit={handleSubmit} className={styles.btnsAuth} method='POST'>
-          {emailDirty && emailError && (
-            <div className={styles.errors}>{emailError}</div>
+          {loginDirty && loginError && (
+            <div className={styles.errors}>{loginError}</div>
           )}
 
           <input
-            value={email}
-            onChange={e => emailHandler(e)}
+            value={login}
+            onChange={e => loginHandler(e)}
             onBlur={e => blurHandler(e)}
-            name='email'
+            name='login'
             type='text'
-            placeholder='Email...'
+            placeholder='Login'
           />
           {passwordDirty && passwordError && (
             <div className={styles.errors}>{passwordError}</div>
