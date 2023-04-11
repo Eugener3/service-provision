@@ -44,7 +44,7 @@ export const MainHeader = (props) => {
             </Link>
             <p>Найти специалиста</p>
             <Link to="/info">
-              <p>Мои заказы</p>
+              <p>Личный кабинет</p>
             </Link>
             <p>Стать исполнителем</p>
           </div>

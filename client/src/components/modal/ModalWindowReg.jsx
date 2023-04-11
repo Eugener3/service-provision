@@ -11,9 +11,7 @@ export const ModalWindowReg = (props) => {
 
   const [userDetails, setUserDetails] = useState({
     login: "",
-    email: "",
     password: "",
-    telephone: "",
   });
   const [error, setError] = useState(null);
 
@@ -65,24 +63,14 @@ export const ModalWindowReg = (props) => {
             placeholder="Login"
             onChange={handleChange}
           />
-          <input
-            type="text"
-            name="email"
-            placeholder="E-mail"
-            onChange={handleChange}
-          />
+
           <input
             type="password"
             name="password"
             placeholder="Password"
             onChange={handleChange}
           />
-          <input
-            type="text"
-            name="telephone"
-            placeholder="Телефон"
-            onChange={handleChange}
-          />
+
           <button type="submit">Зарегаца</button>
         </form>
       </div>

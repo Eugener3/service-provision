@@ -103,7 +103,7 @@ export const ModalWindow = (props) => {
           <BsXLg style={{ cursor: "pointer" }} onClick={props.onCloseModal} />
         </div>
 
-        <form onSubmit={/*handleSubmitRHF*/(handleSubmit)} className={styles.btnsAuth} method="POST">
+        <form onSubmit={/*handleSubmitRHF*/handleSubmit} className={styles.btnsAuth} method="POST">
           {loginDirty && loginError && (
             <div className={styles.errors}>{loginError}</div>
           )}

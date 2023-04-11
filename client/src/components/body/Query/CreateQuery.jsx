@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ContextCategory } from "../../../utils/Context/ContextCategory";
+import axios from 'axios'
 
 // let [selectedValue, setSelectedValue] = useState()
 import styles from "./CreateQuery.module.scss";
@@ -32,11 +33,20 @@ export const CreateQuery = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(queryDetails);
-    } catch (error) {
+      const {data} = await axios
+            .post("http://localhost:3001/api/query", queryDetails)
+            .then((res) => {
+              // setSuccesAlert(res.data.message);
 
-    }
+            })
+    
+    
+        } catch (error) {
+          // setErrorAlert(error.response.data.message);
+          console.error(error.response)
+        }
   };
+
   const [selectedOption, setSelectedOption] = useState("");
   const [date, setDate] = useState("");
 

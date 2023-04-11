@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Info.module.scss";
-
+import jwtDecode from "jwt-decode"
 import MainHeader from "../../header/MainHeader";
 
 import Profile from "./Profile/Profile";
@@ -13,6 +13,9 @@ const Info = () => {
   const handleButtonClick = (buttonName) => {
     setSelectedButton(buttonName);
   };
+  let logUser
+  let jwt = localStorage.getItem("token")
+  if (jwt) {  logUser = jwtDecode(jwt)}
 
   return (
     <div className={styles.wrapper}>
@@ -38,7 +41,7 @@ const Info = () => {
                 selectedButton === "resume" ? styles.active : ""
               }`} > Резюме </button>
           </div>
-          {selectedButton === "profile" && <Profile />}
+          {selectedButton === "profile" && <Profile profile={logUser}/>}
           {selectedButton === "query" && <Query />}
           {selectedButton === "resume" && <Resume />}
         </div>
