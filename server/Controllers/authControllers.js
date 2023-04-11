@@ -10,7 +10,7 @@ const SECRET_KEY = process.env.SECRET_KEY
 module.exports = {
     login: async (req, res) => {
         try {
-            const candidate = await User.findOne({email: req.body.email})
+            const candidate = await User.findOne({login: req.body.login})
             if(candidate) {
                 if(await bcrypt.compare(req.body.password, candidate.password)) {
                     const token = jwt.sign({
@@ -29,7 +29,7 @@ module.exports = {
             }
             else{
                 res.status(409).json({
-                    message: "Пользователя с такой почтой не существует"
+                    message: "Такого пользователя не существует"
                 })
             }
         } catch (error) {
