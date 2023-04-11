@@ -47,6 +47,7 @@ module.exports = {
                 refUser: decodedData.idUser,
                 title: req.body.title,
                 description: req.body.description,
+                place: req.body.place,
                 priceOf: req.body.priceOf,
                 priceAf: req.body.priceAf,
                 deadline: req.body.deadline,
@@ -86,6 +87,7 @@ module.exports = {
                 const update =  {
                     title: req.body.title,
                     description: req.body.description,
+                    place: req.body.place,
                     priceOf: req.body.priceOf,
                     priceAf: req.body.priceAf,
                     deadline: req.body.deadline,

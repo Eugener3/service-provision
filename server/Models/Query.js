@@ -16,6 +16,11 @@ const querySchema = new Schema({
         type: String,
         required: true
     },
+    place: {
+        type: String,
+        required: true,
+        default: "Кемерово, кузнецкий пр-т д.40, кв.13"
+    },
     priceOf: {
         type: String,
         required: true

@@ -2,6 +2,7 @@ require('dotenv').config()
 const User = require('../Models/User')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const {validationResult} = require('express-validator')
 
 
 
@@ -10,6 +11,10 @@ const SECRET_KEY = process.env.SECRET_KEY
 module.exports = {
     login: async (req, res) => {
         try {
+            const validErrors = validationResult(req);
+            if (!validErrors.isEmpty()) {
+                return res.status(400).json({message: validErrors.errors[0].msg})
+            }
             const candidate = await User.findOne({login: req.body.login})
             if(candidate) {
                 if(await bcrypt.compare(req.body.password, candidate.password)) {
@@ -43,22 +48,11 @@ module.exports = {
     },
     register: async (req, res) => {
         try {
-            if(!req.body.email) {
-                res.status(404).json({
-                    message: "Поле почта не заполнено"
-                })
+            const validErrors = validationResult(req);
+            if (!validErrors.isEmpty()) {
+                return res.status(400).json({message: validErrors.errors[0].msg})
             }
-            else if(!req.body.login) {
-                res.status(404).json({
-                    message: "Поле логин не заполнено"
-                })
-            }
-            else if(!req.body.password) {
-                res.status(404).json({
-                    message: "Поле пароль не заполнено"
-                })
-            }
-            else if(await User.findOne({email: req.body.email})) {
+            if(await User.findOne({email: req.body.email})) {
                 res.status(409).json({
                     message: "Пользователь с такой почтой уже существует"
                 })
