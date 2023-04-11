@@ -48,7 +48,7 @@ module.exports = {
                     telephone: req.body.telephone,
                     bio: req.body.bio
                 }
-                await Query.updateOne({_id: req.params.id}, update, {
+                await  User.updateOne({_id: req.params.id}, update, {
                     new: true
                   })
                 res.status(200).json({
@@ -61,8 +61,9 @@ module.exports = {
                 })
              }
         } catch (error) {
-            res.status(404).json({
-                message: "Заявка не найдена"
+            console.log(error)
+            res.status(409).json({
+                message: "Ошибка при обновлении юзера"
             })
         }
     },
