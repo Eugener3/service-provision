@@ -34,7 +34,7 @@ export const CreateQuery = () => {
     try {
       console.log(queryDetails);
     } catch (error) {
-      
+
     }
   };
   const [selectedOption, setSelectedOption] = useState("");

@@ -1,0 +1,60 @@
+$main-color: #565acf;
+$dark-main-color: #1f2278;
+$hover-color: #f17732;
+
+.yourQuery {
+    margin: 40px 0 0 40px;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    color: $dark-main-color;
+}
+
+.queryesWrapp {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 10px;
+    margin: 0 auto;
+    margin-top: 20px;
+
+    max-width: 800px;
+
+    border: 2px solid $main-color;
+    border-radius: 20px;
+
+    box-shadow: 0 5px 30px 0 rgba(86,90,207,.3);
+
+    background-image: url("../../../../img/backgrounds/background_query.jpg");
+
+    
+    
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-top: 10px;
+    }
+
+    span {
+        font-size: 20px;
+        font-weight: 600;
+
+        color: $main-color;
+    }
+
+    p {
+        font-size: 18px;
+        font-weight: 500;
+
+        margin-left: 10px;
+    }
+}
+
+.wrapper {
+    background-color: #fff;
+    height: auto;
+}

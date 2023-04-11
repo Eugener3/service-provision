@@ -16,6 +16,7 @@ function App() {
     <Routes>
       <Route path="/info" element={<Info/>} />
       <Route path="/profile" element={<Profile/>}/>
+      <Route path="/query" element={<CreateQuery/>}/>
       <Route exact path="/" element={<Home/>} />
     </Routes>
   )

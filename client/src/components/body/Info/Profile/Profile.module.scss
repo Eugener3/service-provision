@@ -3,6 +3,9 @@ $dark-main-color: #1f2278;
 $hover-color: #f17732;
 
 
+.yourData {
+    width: 270px;
+}
 
 .bio {
     display: flex;
@@ -26,6 +29,7 @@ $hover-color: #f17732;
     
     h1 {
         font-size: 28px;
+        color: $dark-main-color;
     }
 
     h2, h3 {
@@ -88,10 +92,6 @@ $hover-color: #f17732;
         
         border: none;
         border-radius: 10px;
-    
-        
-    
-        transition: 0.5s ease-in-out;
     
         cursor: pointer;
        

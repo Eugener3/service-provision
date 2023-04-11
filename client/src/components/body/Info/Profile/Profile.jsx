@@ -11,15 +11,16 @@ export const Profile = () => {
   return (
     <div className={styles.profileWrapper}>
       <div className={styles.bio}>
-        <div>
+        <div className={styles.yourData}>
           <h1>Ваши данные:</h1>
+          <HiOutlinePencilAlt size={"1.5em"}/>
         </div>
         <div>
           <h2>Логин: example</h2>
         </div>
         <div>
           <h3>Электронная почта: example@mail.ru</h3>
-          <HiOutlinePencilAlt />
+          
         </div>
       </div>
 

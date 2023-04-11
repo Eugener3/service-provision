@@ -16,6 +16,20 @@ textarea:-moz-placeholder {color: $main-color;opacity: 1;}
 textarea::-moz-placeholder {color: $main-color;opacity: 1;}
 textarea:-ms-input-placeholder {color: $main-color;}
 
+.btnProfile.active {
+background-color: $hover-color;
+}
+.btnQuery.active {
+background-color: $hover-color;
+}
+.btnResume.active {
+background-color: $hover-color;
+}
+
+.btnProfile, .btnQuery, .btnResume {
+    background-color: $dark-main-color;
+}
+
 .infoWrapp {
 background-image: url("../../../img/backgrounds/background_query.jpg");
 height: 950px;
@@ -43,9 +57,7 @@ height: 950px;
 
         border-bottom: 2px solid black;
         
-        .btnProfile {
-            background-color: $hover-color;
-        }                                         
+                                           
 
         button {
             width: 240px;
@@ -64,7 +76,6 @@ height: 950px;
             border: none;
             border-radius: 10px;
         
-            background-color: $main-color;
         
             color: white;
         
@@ -74,9 +85,7 @@ height: 950px;
         
             cursor: pointer;
 
-            &:hover {
-                background-color: $dark-main-color;
-            }
+            
         }
     }             
 }
