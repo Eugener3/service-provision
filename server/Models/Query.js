@@ -31,7 +31,11 @@ const querySchema = new Schema({
     category: {
         type: String,
         required: true
-    }
+    },
+    responded: [{
+        ref: "users",
+        type: Schema.Types.ObjectId
+    }]
 })
 
 module.exports = mongoose.model("queries", querySchema)

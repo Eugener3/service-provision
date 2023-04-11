@@ -31,25 +31,7 @@ const resumeSchema = new Schema({
     refCategory: [{
         type: String,
         ref: "categories"
-    }],
-    reviews: [
-        {
-            refRevUser: {
-                ref: "users",
-                type: Schema.Types.ObjectId,
-            },
-            rating: {
-                type: Number
-            },
-            otziv: {
-                type: String
-            },
-            createData: {
-                type: Date,
-                default: Date.now,
-            }
-        }
-    ]
+    }]
 })
 
 module.exports = mongoose.model('resumes', resumeSchema)
