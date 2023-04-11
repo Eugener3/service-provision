@@ -43,8 +43,6 @@ module.exports = {
         try {
             const candidate = await User.findById(req.params.id)
              if(candidate) {
-                const token = req.headers.authorization.split(' ')[1]
-                const decodedData = jwt.verify(token, secret)
                 const update =  {
                     FIO: req.body.FIO,
                     telephone: req.body.telephone,

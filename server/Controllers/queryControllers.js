@@ -1,4 +1,5 @@
 const Query = require('../Models/Query')
+const Resume = require('../Models/Resume')
 const jwt = require("jsonwebtoken")
 
 module.exports = {
@@ -112,22 +113,38 @@ module.exports = {
     addResponded: async (req, res) => {
         try {
             const candidate = await Query.findById(req.params.id)
-             if(candidate) {
+            if(candidate) {
                 const token = req.headers.authorization.split(' ')[1]
                 const decodedData = jwt.verify(token, process.env.SECRET_KEY)
                 const update =  {
                     $push: {responded: decodedData.idUser}
                 }
-                await Query.updateOne({_id: req.params.id}, update, {
-                    new: true
-                  })
-                res.status(200).json({
-                    message: "Уведомление оправлено"
+            if(!(await Resume.findOne({refUser: decodedData.idUser}))) {
+                res.status(404).json({
+                    message: "У вас нет резюме"
                 })
+            }
+            else {
+                if(await Query.findOne({responded: {$elemMatch: {$eq: decodedData.idUser}}})) {
+                    res.status(409).json({
+                        message: "Вы уже уведомили заказчика"
+                    })
+                }
+                else{
+                    await Query.updateOne({_id: req.params.id}, update, {
+                        new: true
+                      })
+                    
+                    res.status(200).json({
+                        message: "Уведомление оправлено"
+                    })
+                }    
+            }
+
              }
              else {
                 res.status(409).json({
-                    message: "Ошибка"
+                    message: "Ошибка при добавлении уведомления"
                 })
              }
         } catch (error) {
