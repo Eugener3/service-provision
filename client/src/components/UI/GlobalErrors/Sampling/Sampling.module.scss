@@ -1,0 +1,21 @@
+.oops {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 10px;
+    margin: 0 auto;
+    font-size: 18px;
+    font-weight: 700;
+    color: black;
+}
+
+.errorText {
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 8px;
+}

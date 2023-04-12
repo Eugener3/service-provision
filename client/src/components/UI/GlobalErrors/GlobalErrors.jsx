@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { AiFillAlert } from 'react-icons/ai';
+import React from 'react'
 
 import Error from './Sampling/Error';
 import Confirm from './Sampling/Confirm';
@@ -7,19 +6,15 @@ import Message from './Sampling/Message';
 
 import styles from './GlobalErrors.module.scss'
 
-export const GlobalErrors = (message) => {
-    const [errorMess, setErrorMess] = useState = "";
-
-    switch (message) {
+export const GlobalErrors = (type, message) => {
+    switch (type) {
         case 'error':
-            return <Error message/>
-            break;
+            return console.log('ОШИБКА') //<Error message={message}/>
+            
         case 'confirm':
-            return <Confirm message/>
-            break;
+            return  console.log('КАЙФ')//<Confirm message={message}/>
         case 'message':
-            return <Message message/>
-            break;
+            return console.log('не ЗНАЕТ') //<Message message={message}/>
     }
 
 }
