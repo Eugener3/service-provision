@@ -7,7 +7,10 @@ module.exports = {
             const candidate = await Resume.find()
             res.status(200).json(candidate)
         } catch (error) {
-            res.status(409).json(error)
+            console.log(error)
+            res.status(409).json({
+                message: "Resumes error"
+            })
         }
     },
     getById: async (req, res) => {
@@ -15,8 +18,9 @@ module.exports = {
             const candidate = await Query.findById(req.params.id)
                 res.status(200).json(candidate)
         } catch (error) {
-            res.status(404).json({
-                message: "Заявка не найдена"
+            console.log(error)
+            res.status(409).json({
+                message: "Resumes error"
             })
         }
     },
@@ -28,8 +32,9 @@ module.exports = {
                 res.status(200).json(candidate)
 
         } catch (error) {
-            res.status(404).json({
-                message: "Резюме не найдено"
+            console.log(error)
+            res.status(409).json({
+                message: "Resumes error"
             })
         }
     },
@@ -38,7 +43,10 @@ module.exports = {
             const candidate = await Resume.find({refCategory: req.params.id})
             res.status(200).json(candidate)
         } catch (error) {
-            res.status(409).json(error)
+            console.log(error)
+            res.status(409).json({
+                message: "Resumes error"
+            })
         }
     },
     create: async (req, res) => {
@@ -68,7 +76,10 @@ module.exports = {
                 })
             }
         } catch (error) {
-            res.status(409).json(error)
+            console.log(error)
+            res.status(409).json({
+                message: "Resumes error"
+            })
         }
     },
     delete: async (req, res) => {
@@ -80,8 +91,9 @@ module.exports = {
                 })
 
         } catch (error) {
-            res.status(404).json({
-                message: "Резюме не найдено"
+            console.log(error)
+            res.status(409).json({
+                message: "Resumes error"
             })
         }
     },
@@ -112,8 +124,9 @@ module.exports = {
                 })
              }
         } catch (error) {
-            res.status(404).json({
-                message: "Резюме не найдено"
+            console.log(error)
+            res.status(409).json({
+                message: "Resumes error"
             })
         }
     }
