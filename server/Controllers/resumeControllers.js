@@ -53,13 +53,14 @@ module.exports = {
         try {
             const token = req.headers.authorization.split(' ')[1]
             const decodedData = jwt.verify(token, process.env.SECRET_KEY)
-            const candidate = await Resume.find({refUser: decodedData.idUser})
-            if(await Resume.findOne({redUser: decodedData.User})) {
-                console.log(candidate)
+            const existingResume = await Resume.findOne({ refUser: decodedData.idUser });
+            console.log(Resume.findOne({refUser: decodedData.IdUser}))
+            console.log(decodedData.idUser)
+            if (existingResume) {
                 res.status(409).json({
-                    message: "У вас уже есть резюме"
-                })
-            }
+                  message: "У вас уже есть резюме"
+                });
+              }
             else {
                 const resume = new Resume({
                     refUser: decodedData.idUser,
@@ -71,7 +72,6 @@ module.exports = {
                     // refCategory: [userRole.value] РОДИОН ТЫ ГДЕ БЛЯТЬ
                 })
                 await resume.save()
-                console.log(candidate)
                 res.status(200).json({
                     message: "Резюме успешно создано"
                 })
