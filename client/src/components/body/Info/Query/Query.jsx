@@ -27,11 +27,24 @@ export const Query = props => {
     fetchQueries(props)
   }, [props])
 
+  const getUserById = async id => {
+    const headers = await getToken()
+    const result = await axios.get(`http://localhost:3001/api/user/${id}`, {
+      headers,
+    })
+
+    return result.data.login
+  }
+
+
+
+  
+
   return (
     <div className={styles.wrapper}>
       <p className={styles.yourQuery}>Ваши заказы:</p>
       {queries.map(query => (
-        <div className={styles.queryesWrapp}>
+        <div key={query._id} className={styles.queryesWrapp}>
           <div>
             <span> Заголовок:</span> <p>{query.title}</p>
           </div>
@@ -50,12 +63,25 @@ export const Query = props => {
           </div>
 
           <div>
-            <span> Цена:</span> <p>от {query.priceOf} до {query.priceAf}</p>
+            <span> Цена:</span>{" "}
+            <p>
+              от {query.priceOf} до {query.priceAf}
+            </p>
           </div>
 
           <div>
             <span> Категория: </span> <p>{query.category}</p>
           </div>
+
+          {query.responded.length > 0 && (
+            <div>
+              <span> Откликнулись: </span>
+              {query.responded.map((responded, index) => {
+                const user = getUserById(responded)
+                console.log(user)
+              })}
+            </div>
+          )}
         </div>
       ))}
     </div>
