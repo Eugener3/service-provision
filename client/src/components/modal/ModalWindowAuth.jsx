@@ -1,29 +1,34 @@
-import React from "react";
-import axios from "axios";
+import React, { useState } from "react"
+import axios from "axios"
 
-import styles from "./ModalAuth.module.scss";
+import styles from "./ModalAuth.module.scss"
+import { useForm } from "react-hook-form"
 
-import { BsXLg } from "react-icons/bs";
+import { BsXLg } from "react-icons/bs"
 
-export const ModalWindow = (props) => {
+export const ModalWindow = props => {
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+    reset,
+  } = useForm({ mode: "all" })
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmited = async data => {
     try {
-      const { data } = await axios({
-        method: "post",
-        url: "http://localhost:3001/api/auth/login",
-        data: {
-          login: "disa",
-          password: "123",
-        },
-      });
-      localStorage.setItem("token", data);
-      props.onCloseModal();
+      const response = await axios.post(
+        "http://localhost:3001/api/auth/login",
+        data
+      )
+      console.log(response.data)
+      localStorage.setItem("token", response.data)
+      props.onCloseModal()
     } catch (error) {
-      console.error(error)
+      console.log(error.message)
     }
-  };
+
+    reset()
+  }
 
   return (
     <div className={styles.modalWrapper}>
@@ -33,22 +38,39 @@ export const ModalWindow = (props) => {
           <BsXLg style={{ cursor: "pointer" }} onClick={props.onCloseModal} />
         </div>
 
-        <form onSubmit={handleSubmit} className={styles.btnsAuth}>
+        <form
+          onSubmit={handleSubmit(handleSubmited)}
+          className={styles.btnsAuth}
+        >
           <input
-            name="login"
-            type="text"
-            placeholder="Логин"
+            type='text'
+            placeholder='Логин'
+            {...register("login", {
+              required: "Заполните логин",
+            })}
           />
+          {errors.login && (
+                <p style={{ color: "red", marginTop: "5px" }}>
+                  {errors.login.message}
+                </p>
+              )}
           <input
-            name="password"
-            type="password"
-            placeholder="Пароль"
+            type='password'
+            placeholder='Пароль'
+            {...register("password", {
+              required: "Заполните пароль",
+            })}
           />
-          <button>Войти</button>
+          {errors.password && (
+                <p style={{ color: "red", marginTop: "5px" }}>
+                  {errors.password.message}
+                </p>
+              )}
+          <button disabled={!isValid}>Войти</button>
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ModalWindow;
+export default ModalWindow
