@@ -27,7 +27,7 @@ module.exports = {
     getByUser: async (req, res) => {
         try {
             const token = req.headers.authorization.split(' ')[1]
-            const decodedData = jwt.verify(token, secret)
+            const decodedData = jwt.verify(token, process.env.SECRET_KEY)
             const candidate = await Resume.findOne({refUser: decodedData.idUser})
                 res.status(200).json(candidate)
 
@@ -52,7 +52,7 @@ module.exports = {
     create: async (req, res) => {
         try {
             const token = req.headers.authorization.split(' ')[1]
-            const decodedData = jwt.verify(token, secret)
+            const decodedData = jwt.verify(token, process.env.SECRET_KEY)
             const candidate = await Resume.find({refUser: req.params.id})
             if(candidate) {
                 res.status(409).json({
@@ -102,7 +102,7 @@ module.exports = {
             const candidate = await Resume.findOne({_id: req.params.id})
              if(candidate) {
                 const token = req.headers.authorization.split(' ')[1]
-                const decodedData = jwt.verify(token, secret)
+                const decodedData = jwt.verify(token, process.env.SECRET_KEY)
                 const update =  {
                     title: req.body.title,
                     avatarUrl: req.body.avatarUrl,
