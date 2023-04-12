@@ -31,6 +31,7 @@ export const AllQuery = ({props}) => {
         ) : (
           <p className={styles.queryEmpty} >Заявок нет</p>
         )}
+        
       </div>
     </div>
   </div>
