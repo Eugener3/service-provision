@@ -34,28 +34,17 @@ export const ModalWindowReg = props => {
     reset()
   }
 
-  // const handleError = () => {
-  //   setShowError(true)
-  //   console.log(showError)
-  // }
-
- 
-      
-
-  // const {showError, setShowError} = useContext(ErrorContext)
   const [showAlert2, setShowAlert2] = useState({})
 
   return (
     <>
     
     <div className={styles.modalWrapper}>
-      <div className={styles.modalWindow}>
-        <div className={styles.enterWrapper}>
-
-          <div>
-
+        <div>
            <GlobalErrors object={showAlert2}/>
         </div>
+      <div className={styles.modalWindow}>
+        <div className={styles.enterWrapper}>
           <p>Регистрация</p>
           <BsXLg style={{ cursor: "pointer" }} onClick={props.onCloseModal} />
         </div>
