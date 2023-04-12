@@ -1,0 +1,147 @@
+$main-color: #565acf;
+$dark-main-color: #1f2278;
+$hover-color: #f17732;
+
+input::placeholder {color: $main-color;}
+input::-webkit-input-placeholder {color: $main-color;}
+input::-ms-input-placeholder {color: $main-color;}
+input:-moz-placeholder {color: $main-color;opacity: 1;}
+input::-moz-placeholder {color: $main-color;opacity: 1;}
+input:-ms-input-placeholder {color: $main-color;}
+
+.allQueryWrapp {
+    background-image: url("../../../img/backgrounds/background_query.jpg");
+    height: 950px;
+    
+}
+
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    padding-top: 40px;
+
+    a {
+        text-decoration: none;
+    }
+
+    h6 {
+        font-weight: 700;
+        font-size: 60px;
+        font-family: "Montserrat",sans-serif;
+
+        color: $dark-main-color;
+    }
+    .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 180px;
+        height: 40px;
+
+        margin-top: 30px;
+
+        text-align: center;
+
+        box-shadow: 0 5px 30px 0 rgba(86,90,207,.3);
+
+        font-family: "Montserrat",sans-serif;
+
+        border-radius: 10px;
+
+        background-color: $main-color;
+       
+        color: white;
+
+        transition: 0.5s ease-in-out;
+
+        text-decoration: none;
+
+        cursor: pointer;
+
+        &:hover {
+            background-color: $dark-main-color;
+        }
+
+        svg {
+            height: 1.5em;
+            width: 1.5em;
+            margin-right: 10px; 
+        }
+    }
+}
+
+
+.queryesWrapp {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 10px;
+    margin: 0 auto;
+    margin-top: 40px;
+
+    width: 800px;
+
+    border: 2px solid $main-color;
+    border-radius: 20px;
+
+    box-shadow: 0 5px 30px 0 rgba(86,90,207,.3);
+
+    background-image: url("../../../img/backgrounds/background_query.jpg");
+
+    
+    
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-top: 10px;
+    }
+
+    span {
+        font-size: 20px;
+        font-weight: 600;
+
+        color: $main-color;
+    }
+
+    p {
+        font-size: 18px;
+        font-weight: 500;
+
+        margin-left: 10px;
+    }
+}
+
+.wrapperAllQuery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin: 0 auto;
+    margin-top: 10px;
+    padding: 20px 0 50px 0;
+
+    max-width: 800px;
+    height: auto;
+
+    border-radius: 50px;
+
+    background-color: #fff;
+}
+
+.queryEmpty {
+    font-size: 24px;
+    font-weight: 500;
+
+    margin: 0 auto;
+
+    color: $dark-main-color;
+}

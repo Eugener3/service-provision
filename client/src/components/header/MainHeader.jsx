@@ -42,7 +42,9 @@ export const MainHeader = props => {
             <Link to='/info'>
               <p>Личный кабинет</p>
             </Link>
-            <p>Стать исполнителем</p>
+            <Link to='/allQuery'>
+              <p>Стать исполнителем</p>
+            </Link>
           </div>
         )}
 
@@ -89,7 +91,9 @@ export const MainHeader = props => {
             <div className={styles.loginBtn}>
               <div className={styles.rightButtons}>
                 <button className={styles.btnLogin}>
-                  <p>ПРОФИЛЬ</p>
+                  <Link to='/info'>
+                    <p>ПРОФИЛЬ</p>
+                  </Link>
                   <div className={styles.insideBtn}>
                     <BiUserCircle size='2em' fill='#565acf' />
                   </div>
