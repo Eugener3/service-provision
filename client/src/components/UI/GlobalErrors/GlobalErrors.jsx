@@ -6,16 +6,16 @@ import Message from './Sampling/Message';
 
 import styles from './GlobalErrors.module.scss'
 
-export const GlobalErrors = (type, message) => {
+export const GlobalErrors = ( {type, message} ) => {
     switch (type) {
-        case 'error':
-            return console.log('ОШИБКА') //<Error message={message}/>
-            
-        case 'confirm':
-            return  console.log('КАЙФ')//<Confirm message={message}/>
-        case 'message':
-            return console.log('не ЗНАЕТ') //<Message message={message}/>
+      case 'error':
+        return <Error message={message}/>;
+      case 'confirm':
+        return <Confirm message={message}/>;
+      case 'message':
+        return<Message message={message}/>;
+      default:
+        return null;
     }
-
-}
+  };
 export default GlobalErrors
