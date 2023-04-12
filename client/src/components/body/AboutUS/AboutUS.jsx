@@ -19,11 +19,7 @@ import {BsShield} from "react-icons/bs";
 
 
 export const AboutUS = () => {
-    const [showError, setShowError] = useState(false);
-
-    const handleButtonClick = () => {
-    setShowError(true);
-    };
+   
   return (
     <div className={styles.wrapper}>
         <div className={styles.podWrap}>
@@ -52,8 +48,7 @@ export const AboutUS = () => {
 
                 <div className={styles.btnMore}>Узнать больше</div>
 
-                <button onClick={handleButtonClick}>Показать ошибку</button>
-                {showError && <GlobalErrors type='confirm' message='Лютый кайф!'/>}
+                
 
             </div>
         </div>
