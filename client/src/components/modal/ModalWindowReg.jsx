@@ -8,7 +8,6 @@ import styles from "./ModalReg.module.scss"
 import { BsXLg } from "react-icons/bs"
 import { useForm } from "react-hook-form"
 
-
 export const ModalWindowReg = props => {
   const {
     register,
@@ -16,7 +15,6 @@ export const ModalWindowReg = props => {
     handleSubmit,
     reset,
   } = useForm({ mode: "all" })
-
 
   const handleSubmited = async data => {
     try {
@@ -28,7 +26,11 @@ export const ModalWindowReg = props => {
         .then(() => props.onCloseModal())
     } catch (error) {
       console.log(error.response.data.message)
-      setShowAlert2({active: true, message: error.response.data.message, type: 'error'})
+      setShowAlert2({
+        active: true,
+        message: error.response.data.message,
+        type: "error",
+      })
     }
 
     reset()
@@ -39,61 +41,55 @@ export const ModalWindowReg = props => {
   //   console.log(showError)
   // }
 
- 
-      
-
   // const {showError, setShowError} = useContext(ErrorContext)
   const [showAlert2, setShowAlert2] = useState({})
 
   return (
     <>
-    
-    <div className={styles.modalWrapper}>
-      <div className={styles.modalWindow}>
-        <div className={styles.enterWrapper}>
+      <div className={styles.modalWrapper}>
+        <div className={styles.modalWindow}>
+          <div className={styles.enterWrapper}>
+            <div>
+              <GlobalErrors object={showAlert2} />
+            </div>
+            <p>Регистрация</p>
+            <BsXLg style={{ cursor: "pointer" }} onClick={props.onCloseModal} />
+          </div>
 
-          <div>
-
-           <GlobalErrors object={showAlert2}/>
-        </div>
-          <p>Регистрация</p>
-          <BsXLg style={{ cursor: "pointer" }} onClick={props.onCloseModal} />
-        </div>
-        
-        <form
-          className={styles.btnsAuth}
-          onSubmit={handleSubmit(handleSubmited)}
-        >
-          <input
-            type='text'
-            placeholder='Логин'
-            {...register("login", 
-              
+          <form
+            className={styles.btnsAuth}
+            onSubmit={handleSubmit(handleSubmited)}
+          >
+            <input
+              type='text'
+              placeholder='Логин'
+              {...register("login", {
+                required: "Заполните логин",
+              })}
+            />
+            {errors.login && (
+              <p style={{ color: "red", marginTop: "5px" }}>
+                {errors.login.message}
+              </p>
             )}
-          />
-          {errors.login && (
-            <p style={{ color: "red", marginTop: "5px" }}>
-              {errors.login.message}
-            </p>
-          )}
 
-          <input
-            type='password'
-            placeholder='Пароль'
-            {...register("password", 
-       
+            <input
+              type='password'
+              placeholder='Пароль'
+              {...register("password", {
+                required: "Заполните логин",
+              })}
+            />
+            {errors.password && (
+              <p style={{ color: "red", marginTop: "5px" }}>
+                {errors.password.message}
+              </p>
             )}
-          />
-          {errors.password && (
-            <p style={{ color: "red", marginTop: "5px" }}>
-              {errors.password.message}
-            </p>
-          )}
 
-          <button disabled={!isValid}>Создать аккаунт</button>
-        </form>
+            <button disabled={!isValid}>Создать аккаунт</button>
+          </form>
+        </div>
       </div>
-    </div>
     </>
   )
 }
