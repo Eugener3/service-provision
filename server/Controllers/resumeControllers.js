@@ -53,9 +53,7 @@ module.exports = {
         try {
             const token = req.headers.authorization.split(' ')[1]
             const decodedData = jwt.verify(token, process.env.SECRET_KEY)
-            const existingResume = await Resume.findOne({ refUser: decodedData.idUser });
-            console.log(Resume.findOne({refUser: decodedData.IdUser}))
-            console.log(decodedData.idUser)
+            const existingResume = await Resume.findOne({ refUser: decodedData.idUser })
             if (existingResume) {
                 res.status(409).json({
                   message: "У вас уже есть резюме"
@@ -67,7 +65,7 @@ module.exports = {
                     avatarUrl: req.body.avatarUrl,
                     FIO: req.body.FIO,
                     telephone: req.body.telephone,
-                    email: decodedData.email,
+                    email: req.body.email,
                     description: req.body.description
                     // refCategory: [userRole.value] РОДИОН ТЫ ГДЕ БЛЯТЬ
                 })
