@@ -1,4 +1,4 @@
-const Resume = require('../Models/Query')
+const Resume = require('../Models/Resume')
 const jwt = require("jsonwebtoken")
 
 module.exports = {
@@ -53,8 +53,9 @@ module.exports = {
         try {
             const token = req.headers.authorization.split(' ')[1]
             const decodedData = jwt.verify(token, process.env.SECRET_KEY)
-            const candidate = await Resume.find({refUser: req.params.id})
-            if(candidate) {
+            const candidate = await Resume.find({refUser: decodedData.idUser})
+            if(await Resume.findOne({redUser: decodedData.User})) {
+                console.log(candidate)
                 res.status(409).json({
                     message: "У вас уже есть резюме"
                 })
@@ -62,7 +63,6 @@ module.exports = {
             else {
                 const resume = new Resume({
                     refUser: decodedData.idUser,
-                    title: req.body.title,
                     avatarUrl: req.body.avatarUrl,
                     FIO: req.body.FIO,
                     telephone: req.body.telephone,
@@ -70,7 +70,8 @@ module.exports = {
                     description: req.body.description
                     // refCategory: [userRole.value] РОДИОН ТЫ ГДЕ БЛЯТЬ
                 })
-                await query.save()
+                await resume.save()
+                console.log(candidate)
                 res.status(200).json({
                     message: "Резюме успешно создано"
                 })
@@ -104,7 +105,6 @@ module.exports = {
                 const token = req.headers.authorization.split(' ')[1]
                 const decodedData = jwt.verify(token, process.env.SECRET_KEY)
                 const update =  {
-                    title: req.body.title,
                     avatarUrl: req.body.avatarUrl,
                     FIO: req.body.FIO,
                     telephone: req.body.telephone,
