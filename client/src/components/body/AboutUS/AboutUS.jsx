@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from "./AboutUS.module.scss"
 
 import doctors1 from "../../../img/photos/doctors1.jpg"
@@ -9,14 +9,21 @@ import stoluar from "../../../img/photos/stoluar.jpeg"
 import teacher from "../../../img/photos/teacher.png"
 import svarchik from "../../../img/photos/svarchik.jpg"
 
-
+import GlobalErrors from '../../UI/GlobalErrors/GlobalErrors'
 
 import { BsSpeedometer2 } from "react-icons/bs";
 import { FcLike } from "react-icons/fc";
 import { FcCheckmark } from "react-icons/fc";
 import {BsShield} from "react-icons/bs";
 
+
+
 export const AboutUS = () => {
+    const [showError, setShowError] = useState(false);
+
+    const handleButtonClick = () => {
+    setShowError(true);
+    };
   return (
     <div className={styles.wrapper}>
         <div className={styles.podWrap}>
@@ -44,6 +51,10 @@ export const AboutUS = () => {
                 </div>
 
                 <div className={styles.btnMore}>Узнать больше</div>
+
+                <button onClick={handleButtonClick}>Показать ошибку</button>
+                {showError && <GlobalErrors type='confirm' message='проблемы'/>
+}
 
             </div>
         </div>
