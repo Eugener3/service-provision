@@ -14,8 +14,8 @@ export const ModalWindow = (props) => {
         method: "post",
         url: "http://localhost:3001/api/auth/login",
         data: {
-          // login: login,
-          // password: password,
+          login: "disa",
+          password: "123",
         },
       });
       localStorage.setItem("token", data);

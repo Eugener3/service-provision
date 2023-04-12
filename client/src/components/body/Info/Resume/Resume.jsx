@@ -1,19 +1,20 @@
 import React, { useState } from "react"
-
+import axios from "axios"
 import styles from "./Resume.module.scss"
 
 import "../../../../App.css"
 
 import profileDefault from "../../../../img/photos/profile-default.jpg"
 
-import {useForm} from 'react-hook-form'
+import { useForm } from "react-hook-form"
 
 export const Resume = () => {
-  const {register, formState: {errors}, handleSubmit} = useForm()
-
-
-
-
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+    reset,
+  } = useForm({ mode: "all" })
 
   const [selectedFile, setSelectedFile] = useState(null)
   const [imageUrl, setImageUrl] = useState("")
@@ -29,11 +30,26 @@ export const Resume = () => {
     reader.readAsDataURL(selectedFile)
   }
 
-  const handleSubmited = event => {
-    event.preventDefault()
+  let jwt = localStorage.getItem("token")
+  const headers = { Authorization: jwt }
+  const [resumeDetails, setResumeDetails] = useState()
 
+  const handleSubmited = async data => {
+    setResumeDetails(data)
+    try {
+      await axios
+        .post("http://localhost:3001/api/resume/newCandidate", resumeDetails, {
+          headers,
+        })
+        .then(res => {
+          console.log(res.data.message)
+        })
+    } catch (error) {
+      console.log(error.response.data.message)
+    }
     setSelectedFile(null)
     setImageUrl("")
+    reset()
   }
 
   return (
@@ -43,17 +59,55 @@ export const Resume = () => {
         <div className={styles.wrapper}>
           <div className={styles.inputsWrapper}>
             <div className={styles.form}>
-              <input type='text' placeholder='ФИО' {...register('FIO', {required: "Поле обязательно к заполнению"})}/>
-              <input type='text' placeholder='Телефон' {...register('telephone', {required: "Поле обязательно к заполнению"})}/>
-              <input type='text' placeholder='E-mail' {...register('email', {required: "Поле обязательно к заполнению"})}/>
+              <input
+                type='text'
+                placeholder='ФИО'
+                {...register("FIO", {
+                  required: "Поле обязательно к заполнению",
+                })}
+              />
+              {errors.FIO && (
+                <p style={{ color: "red", marginTop: "5px" }}>
+                  {errors.FIO.message}
+                </p>
+              )}
+              <input
+                type='text'
+                placeholder='Телефон'
+                {...register("telephone", {
+                  required: "Поле обязательно к заполнению",
+                })}
+              />
+              {errors.telephone && (
+                <p style={{ color: "red", marginTop: "5px" }}>
+                  {errors.telephone.message}
+                </p>
+              )}
+              <input
+                type='text'
+                placeholder='E-mail'
+                {...register("email", {
+                  required: "Поле обязательно к заполнению",
+                })}
+              />
+              {errors.email && (
+                <p style={{ color: "red", marginTop: "5px" }}>
+                  {errors.email.message}
+                </p>
+              )}
               <textarea
-                name='description'
-                id=''
                 cols='30'
                 rows='10'
                 placeholder='О себе'
-                {...register('email', {required: "Поле обязательно к заполнению"})}
-              ></textarea >
+                {...register("description", {
+                  required: "Поле обязательно к заполнению",
+                })}
+              ></textarea>
+              {errors.description && (
+                <p style={{ color: "red", marginTop: "5px" }}>
+                  {errors.description.message}
+                </p>
+              )}
             </div>
           </div>
           <div>
@@ -87,7 +141,7 @@ export const Resume = () => {
                 <span class='input__file-button-text'>Выберите файл</span>
               </label>
             </div>
-            <button>Сохранить</button>
+            <button disabled={!isValid}>Сохранить</button>
           </div>
         </div>
       </form>
