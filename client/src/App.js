@@ -1,6 +1,8 @@
-import React, { useState } from "react"
+import React, { useState, useContext} from "react"
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import { ErrorContext } from "./components/UI/GlobalErrors/Sampling/ErrorContext";
 
 import "./App.css"
 
@@ -12,15 +14,24 @@ import Info from "./components/body/Info/Info";
 import AllQuery from "./components/body/AllQuery/AllQuery";
 
 function App() {
-  
+
+  const [showError, setShowError] = useState(false);
+
+  const handleButtonClick = () => {
+  setShowError(true);
+  };
+
   return (
-    <Routes>
-      <Route path="/info" element={<Info/>} />
-      <Route path="/profile" element={<Profile/>}/>
-      <Route path="/query" element={<CreateQuery/>}/>
-      <Route path="/allQuery" element={<AllQuery/>}/>
-      <Route exact path="/" element={<Home/>} />  
-    </Routes>
+    <ErrorContext.Provider value={{showError, setShowError, handleButtonClick}}>    
+      <Routes>
+        <Route path="/info" element={<Info/>} />
+        <Route path="/profile" element={<Profile/>}/>
+        <Route path="/query" element={<CreateQuery/>}/>
+        <Route path="/allQuery" element={<AllQuery/>}/>
+        <Route exact path="/" element={<Home/>} />  
+      </Routes>
+    </ErrorContext.Provider>
+
   )
 }
 

@@ -1,8 +1,14 @@
-import { React } from "react"
+import { React, useState } from "react"
 import axios from "axios"
+
+import GlobalErrors from "../UI/GlobalErrors/GlobalErrors"
+
 import styles from "./ModalReg.module.scss"
+
 import { BsXLg } from "react-icons/bs"
 import { useForm } from "react-hook-form"
+
+
 export const ModalWindowReg = props => {
   const {
     register,
@@ -22,19 +28,38 @@ export const ModalWindowReg = props => {
         .then(() => props.onCloseModal())
     } catch (error) {
       console.log(error.response.data.message)
+      setShowAlert2({active: true, message: error.response.data.message, type: 'error'})
     }
 
     reset()
   }
 
+  // const handleError = () => {
+  //   setShowError(true)
+  //   console.log(showError)
+  // }
+
+ 
+      
+
+  // const {showError, setShowError} = useContext(ErrorContext)
+  const [showAlert2, setShowAlert2] = useState({})
+
   return (
+    <>
+    
     <div className={styles.modalWrapper}>
       <div className={styles.modalWindow}>
         <div className={styles.enterWrapper}>
+
+          <div>
+
+           <GlobalErrors object={showAlert2}/>
+        </div>
           <p>Регистрация</p>
           <BsXLg style={{ cursor: "pointer" }} onClick={props.onCloseModal} />
         </div>
-
+        
         <form
           className={styles.btnsAuth}
           onSubmit={handleSubmit(handleSubmited)}
@@ -42,9 +67,9 @@ export const ModalWindowReg = props => {
           <input
             type='text'
             placeholder='Логин'
-            {...register("login", {
-              required: "Заполните логин",
-            })}
+            {...register("login", 
+              
+            )}
           />
           {errors.login && (
             <p style={{ color: "red", marginTop: "5px" }}>
@@ -55,9 +80,9 @@ export const ModalWindowReg = props => {
           <input
             type='password'
             placeholder='Пароль'
-            {...register("password", {
-              required: "Заполните пароль",
-            })}
+            {...register("password", 
+       
+            )}
           />
           {errors.password && (
             <p style={{ color: "red", marginTop: "5px" }}>
@@ -69,6 +94,7 @@ export const ModalWindowReg = props => {
         </form>
       </div>
     </div>
+    </>
   )
 }
 export default ModalWindowReg
