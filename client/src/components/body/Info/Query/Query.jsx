@@ -5,6 +5,7 @@ import styles from "./Query.module.scss"
 
 export const Query = props => {
   const [queries, setQueries] = useState([])
+  const usersArray = []
 
   const getToken = async () => {
     const token = localStorage.getItem("token")
@@ -23,22 +24,10 @@ export const Query = props => {
       )
 
       setQueries(result.data)
+      console.log(queries)
     }
     fetchQueries(props)
   }, [props])
-
-  const getUserById = async id => {
-    const headers = await getToken()
-    const result = await axios.get(`http://localhost:3001/api/user/${id}`, {
-      headers,
-    })
-
-    return result.data.login
-  }
-
-
-
-  
 
   return (
     <div className={styles.wrapper}>
@@ -72,16 +61,6 @@ export const Query = props => {
           <div>
             <span> Категория: </span> <p>{query.category}</p>
           </div>
-
-          {query.responded.length > 0 && (
-            <div>
-              <span> Откликнулись: </span>
-              {query.responded.map((responded, index) => {
-                const user = getUserById(responded)
-                console.log(user)
-              })}
-            </div>
-          )}
         </div>
       ))}
     </div>
