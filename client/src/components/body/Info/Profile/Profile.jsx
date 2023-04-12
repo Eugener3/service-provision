@@ -1,63 +1,43 @@
 import React, { useState, useEffect } from "react"
+import { useForm } from "react-hook-form"
+
 import axios from "axios"
 
 import styles from "./Profile.module.scss"
 
 import { HiOutlinePencilAlt } from "react-icons/hi"
 
+// .patch(
+//   `http://localhost:3001/api/user/${props.profile.idUser}`,
+//   userDetails,
+//   { headers }
+// )
+
 export const Profile = props => {
-  const [userData, setUserData] = useState("")
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+    reset,
+  } = useForm({ mode: "all" })
+
   let jwt = localStorage.getItem("token")
   const headers = { Authorization: jwt }
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const fetchUser = await axios.get(
-          `http://localhost:3001/api/user/${props.profile.idUser}`,
-          { headers }
-        )
-        setUserData(fetchUser.data)
-      } catch (error) {
-        console.log(error.response)
-      }
-    }
 
-    fetchData()
-  }, [])
+  
+  const [profileDetails, setProfileDetails] = useState()
 
-  const [userDetails, setUserDetails] = useState({
-    FIO: "",
-    telephone: "",
-    bio: "",
-  })
-
-  const handleChange = e => {
-    const { name, value } = e.target
-    setUserDetails(prev => {
-      return { ...prev, [name]: value }
-    })
-  }
-
-  const handleSubmit = async e => {
-    e.preventDefault()
+  
+  const handleSubmited = async data => {
+    console.log(data)
     try {
-      const { data } = await axios
-        .patch(
-          `http://localhost:3001/api/user/${props.profile.idUser}`,
-          userDetails,
-          { headers }
-        )
-        .then(res => {
-          // setSuccesAlert(res.data.message);
-          console.log("nicecock")
-        })
+      await axios.patch(`http://localhost:3001/api/user/${props.profile.idUser}`, data, { headers })
+      console.log("Данные успешно отправлены!")
     } catch (error) {
-      // setErrorAlert(error.response.data.message);
-      console.log(headers)
-      console.log(error.response)
+      console.log(error.response.data.message)
     }
+    reset()
   }
-
   return (
     <div className={styles.profileWrapper}>
       <div className={styles.bio}>
@@ -72,31 +52,49 @@ export const Profile = props => {
           <h3>Электронная почта: {props.profile.email}</h3>
         </div>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(handleSubmited)}>
         <div className={styles.addBIO}>
           <p>Дополните информацию о себе:</p>
           <div>
+              {errors.FIO && (
+                <p style={{ color: "red", marginTop: "5px" }}>
+                  {errors.FIO.message}
+                </p>
+              )}
             <input
               type='text'
               placeholder='ФИО'
               color='white'
-              name='FIO'
-              onChange={handleChange}
+              {...register("FIO", {
+                required: "Поле обязательно к заполнение",
+              })}
             />
             <input
               type='text'
               placeholder='Телефон'
-              name='telephone'
-              onChange={handleChange}
+              {...register("telephone", {
+                required: "Поле обязательно к заполнение",
+              })}
             />
+            {errors.telephone && (
+                <p style={{ color: "red", marginTop: "5px" }}>
+                  {errors.telephone.message}
+                </p>
+              )}
             <textarea
-              name='bio'
-              onChange={handleChange}
               id=''
               cols='30'
               rows='10'
               placeholder='О себе'
+              {...register("bio", {
+                required: "Поле обязательно к заполнению",
+              })}
             ></textarea>
+            {errors.bio && (
+                <p style={{ color: "red", marginTop: "5px" }}>
+                  {errors.bio.message}
+                </p>
+              )}
           </div>
         </div>
         <button type='submit'>Сохранить</button>
