@@ -1,56 +1,63 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import axios from "axios"
 
 import styles from "./Query.module.scss"
 
-export const Query = () => {
+export const Query = props => {
+  const [queries, setQueries] = useState([])
 
-  // const handleSubmited = async data => {
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:3001/api/auth/login",
-  //       data
-  //     )
-  //     console.log(response.data)
-  //     localStorage.setItem("token", response.data)
-  //     props.onCloseModal()
-  //   } catch (error) {
-  //     console.log(error.message)
-  //   }
+  const getToken = async () => {
+    const token = localStorage.getItem("token")
+    const headers = { Authorization: token }
+    return headers
+  }
 
-  //   reset()
-  // }
+  useEffect(() => {
+    const fetchQueries = async props => {
+      const headers = await getToken()
+      const result = await axios.get(
+        `http://localhost:3001/api/query/byuser/${props.profile.idUser}`,
+        {
+          headers,
+        }
+      )
+
+      setQueries(result.data)
+    }
+    fetchQueries(props)
+  }, [props])
 
   return (
     <div className={styles.wrapper}>
-
       <p className={styles.yourQuery}>Ваши заказы:</p>
+      {queries.map(query => (
+        <div className={styles.queryesWrapp}>
+          <div>
+            <span> Заголовок:</span> <p>{query.title}</p>
+          </div>
 
-      <div className={styles.queryesWrapp}>
-        <div>
-          <span> Заголовок:</span> <p>Example</p>
-        </div>
-        <div>
-          <span> Описание: </span>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-        </div>
+          <div>
+            <span> Описание: </span>
+            <p>{query.description}</p>
+          </div>
 
-        <div>
-          <span>Место:</span> <p>ExampleExampleExample</p>
-        </div>
+          <div>
+            <span>Место:</span> <p>{query.place}</p>
+          </div>
 
-        <div>
-          <span> Дата завершения:</span> <p>12.04.2023</p>
-        </div>
+          <div>
+            <span> Дата завершения:</span> <p>{query.deadline}</p>
+          </div>
 
-        <div>
-          <span> Цена:</span> <p>от 2900 до 5700</p>
-        </div>
+          <div>
+            <span> Цена:</span> <p>от {query.priceOf} до {query.priceAf}</p>
+          </div>
 
-        <div>
-          <span> Категория: </span> <p>Example</p>
+          <div>
+            <span> Категория: </span> <p>{query.category}</p>
+          </div>
         </div>
-      </div>
+      ))}
     </div>
   )
 }

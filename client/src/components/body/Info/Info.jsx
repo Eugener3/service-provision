@@ -42,7 +42,7 @@ const Info = () => {
               }`} > Резюме </button>
           </div>
           {selectedButton === "profile" && <Profile profile={logUser}/>}
-          {selectedButton === "query" && <Query />}
+          {selectedButton === "query" && <Query profile={logUser}/>}
           {selectedButton === "resume" && <Resume />}
         </div>
       </div>

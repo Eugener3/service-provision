@@ -8,6 +8,10 @@ import styles from "./Profile.module.scss"
 import { HiOutlinePencilAlt } from "react-icons/hi"
 
 export const Profile = props => {
+
+
+
+
   const {
     register,
     formState: { errors, isValid },
