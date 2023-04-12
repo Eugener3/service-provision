@@ -52,9 +52,8 @@ export const AboutUS = () => {
 
                 <div className={styles.btnMore}>Узнать больше</div>
 
-                {/* <button onClick={handleButtonClick}>Показать ошибку</button>
-                {showError && <GlobalErrors type='confirm' message='проблемы'/>
-} */}
+                <button onClick={handleButtonClick}>Показать ошибку</button>
+                {showError && <GlobalErrors type='confirm' message='Лютый кайф!'/>}
 
             </div>
         </div>

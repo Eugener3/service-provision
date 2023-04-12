@@ -142,7 +142,7 @@ export const Resume = () => {
                 <span class='input__file-button-text'>Выберите файл</span>
               </label>
             </div>
-            <button disabled={!isValid}>Сохранить</button>
+            <button className={styles.btnSave} disabled={!isValid}>Сохранить</button>
           </div>
         </div>
       </form>
