@@ -34,6 +34,7 @@ export const CreateQuery = () => {
 
   const handleSubmit = async e => {
     e.preventDefault()
+    console.log(queryDetails)
     try {
       await axios
         .post("http://localhost:3001/api/query", queryDetails, { headers })
@@ -51,8 +52,11 @@ export const CreateQuery = () => {
 
   useEffect(() => {
     setqueryDetails({ ...queryDetails, category: selectedOption })
+
+  }, [selectedOption])
+  useEffect(() => {
     setqueryDetails({ ...queryDetails, deadline: date })
-  }, [selectedOption, queryDetails, date])
+  }, [date])
 
   return (
     <ContextCategory.Provider

@@ -36,10 +36,10 @@ export const Resume = () => {
   const [resumeDetails, setResumeDetails] = useState()
 
   const handleSubmited = async data => { //data - с формы
-    setResumeDetails(data) 
+
     try {
       await axios
-        .post("http://localhost:3001/api/resume/newCandidate", resumeDetails, { //апи, данные, хэдер
+        .post("http://localhost:3001/api/resume/newCandidate", data, { //апи, данные, хэдер
           headers,
         })
         .then(res => {
@@ -47,6 +47,7 @@ export const Resume = () => {
         })
     } catch (error) {
       console.log(error.response.data.message)
+      console.log(resumeDetails)
     }
     setSelectedFile(null)
     setImageUrl("")

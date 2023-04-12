@@ -7,12 +7,6 @@ import styles from "./Profile.module.scss"
 
 import { HiOutlinePencilAlt } from "react-icons/hi"
 
-// .patch(
-//   `http://localhost:3001/api/user/${props.profile.idUser}`,
-//   userDetails,
-//   { headers }
-// )
-
 export const Profile = props => {
   const {
     register,
@@ -23,13 +17,8 @@ export const Profile = props => {
 
   let jwt = localStorage.getItem("token")
   const headers = { Authorization: jwt }
-
-  
-  const [profileDetails, setProfileDetails] = useState()
-
   
   const handleSubmited = async data => {
-    console.log(data)
     try {
       await axios.patch(`http://localhost:3001/api/user/${props.profile.idUser}`, data, { headers })
       console.log("Данные успешно отправлены!")
