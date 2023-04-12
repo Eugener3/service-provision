@@ -1,4 +1,4 @@
-import { React, useState } from "react"
+import { React } from "react"
 import axios from "axios"
 import styles from "./ModalReg.module.scss"
 import { BsXLg } from "react-icons/bs"
@@ -11,13 +11,11 @@ export const ModalWindowReg = props => {
     reset,
   } = useForm({ mode: "all" })
 
-  const [regDetails, setRegDetails] = useState()
 
   const handleSubmited = async data => {
-    setRegDetails(data)
     try {
       await axios
-        .post("http://localhost:3001/api/auth/register/", regDetails)
+        .post("http://localhost:3001/api/auth/register/", data)
         .then(res => {
           console.log(res.data.message)
         })

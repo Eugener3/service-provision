@@ -36,7 +36,6 @@ export const Resume = () => {
   const [resumeDetails, setResumeDetails] = useState()
 
   const handleSubmited = async data => { //data - с формы
-
     try {
       await axios
         .post("http://localhost:3001/api/resume/newCandidate", data, { //апи, данные, хэдер

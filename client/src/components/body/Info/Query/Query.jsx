@@ -1,17 +1,28 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useEffect } from "react"
 import axios from "axios"
 
 import styles from "./Query.module.scss"
 
 export const Query = () => {
-  //  const [projects, setProjects] = useState([]);
-  //  const [isLoading, setIsLoading] = useState(false);
-  //  const [error, setError] = useState(null);
+
+  // const handleSubmited = async data => {
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:3001/api/auth/login",
+  //       data
+  //     )
+  //     console.log(response.data)
+  //     localStorage.setItem("token", response.data)
+  //     props.onCloseModal()
+  //   } catch (error) {
+  //     console.log(error.message)
+  //   }
+
+  //   reset()
+  // }
 
   return (
     <div className={styles.wrapper}>
-      {/* <h1>{projects.title}</h1>
-        <p>{projects.description}</p> */}
 
       <p className={styles.yourQuery}>Ваши заказы:</p>
 

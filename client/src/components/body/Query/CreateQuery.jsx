@@ -12,7 +12,11 @@ import SelectOption from "../../UI/CustomSelected/SelectOption"
 import { BiHome } from "react-icons/bi"
 import DateInput from "../../UI/CustomDateInput/DateInput"
 
-const headers = { Authorization: localStorage.getItem("token") }
+const getToken = async () => {
+  const token = localStorage.getItem("token");
+  const headers = { Authorization: token };
+  return  headers ;
+}
 
 export const CreateQuery = () => {
   const [queryDetails, setqueryDetails] = useState({
@@ -36,6 +40,7 @@ export const CreateQuery = () => {
     e.preventDefault()
     console.log(queryDetails)
     try {
+      const headers = await getToken();
       await axios
         .post("http://localhost:3001/api/query", queryDetails, { headers })
         .then(res => {
