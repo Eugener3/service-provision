@@ -32,13 +32,14 @@ export const Resume = () => {
 
   let jwt = localStorage.getItem("token")
   const headers = { Authorization: jwt }
+
   const [resumeDetails, setResumeDetails] = useState()
 
-  const handleSubmited = async data => {
-    setResumeDetails(data)
+  const handleSubmited = async data => { //data - с формы
+    setResumeDetails(data) 
     try {
       await axios
-        .post("http://localhost:3001/api/resume/newCandidate", resumeDetails, {
+        .post("http://localhost:3001/api/resume/newCandidate", resumeDetails, { //апи, данные, хэдер
           headers,
         })
         .then(res => {

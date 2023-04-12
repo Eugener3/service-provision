@@ -17,10 +17,10 @@ const Message = ({ message }) => {
 
   return (
     showAlert && (
-      <div className={styles.wrapperAlert}>
-        <div className={styles.oops}>
-          <AiFillAlert color="#f17732" size="30px" /> Уведомление!
-        </div>
+        <div key={new Date().getTime()} className={styles.wrapperAlert}>
+            <div className={styles.oops}>
+            <AiFillAlert color="#f17732" size="30px" /> Уведомление!
+            </div>
         <div className={styles.errorText}>{message}</div>
       </div>
     )
