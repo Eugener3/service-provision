@@ -13,8 +13,6 @@ export const ModalWindowReg = (props) => {
     login: "",
     password: "",
   });
-  const [error, setError] = useState(null);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserDetails((prev) => {
@@ -25,7 +23,7 @@ export const ModalWindowReg = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const {data} = await axios
+      await axios
         .post("http://localhost:3001/api/auth/register", userDetails)
         .then((res) => {
           setSuccesAlert(res.data.message);

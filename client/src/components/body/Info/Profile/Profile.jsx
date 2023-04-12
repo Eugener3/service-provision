@@ -1,64 +1,62 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import React, { useState, useEffect } from "react"
+import axios from "axios"
 
-import styles from "./Profile.module.scss";
+import styles from "./Profile.module.scss"
 
-import MainHeader from "../../../header/MainHeader";
+import { HiOutlinePencilAlt } from "react-icons/hi"
 
-import { HiOutlinePencilAlt } from "react-icons/hi";
+export const Profile = props => {
+  const [userData, setUserData] = useState("")
+  let jwt = localStorage.getItem("token")
+  const headers = { Authorization: jwt }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchUser = await axios.get(
+          `http://localhost:3001/api/user/${props.profile.idUser}`,
+          { headers }
+        )
+        setUserData(fetchUser.data)
+      } catch (error) {
+        console.log(error.response)
+      }
+    }
 
-export const Profile = (props) => {
-
-
-  const [userData, setUserData] = useState();
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const {fetchUser} = await axios.get(`http://localhost:3001/api/user/${props.profile.idUser}`);
-  //     setUserData(fetchUser.data);
-  //     } catch(error) {
-  //       console.log(error.response);
-  //     }
-      
-  //   };
-
-  //   fetchData();
-  // }, [props.profile.idUser]);
-
-
+    fetchData()
+  }, [])
 
   const [userDetails, setUserDetails] = useState({
     FIO: "",
     telephone: "",
     bio: "",
-  });
+  })
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserDetails((prev) => {
-      return { ...prev, [name]: value };
-    });
-  };
+  const handleChange = e => {
+    const { name, value } = e.target
+    setUserDetails(prev => {
+      return { ...prev, [name]: value }
+    })
+  }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async e => {
+    e.preventDefault()
     try {
       const { data } = await axios
-        .patch(`http://localhost:3001/api/user/${props.profile.idUser}`, userDetails)
-        .then((res) => {
+        .patch(
+          `http://localhost:3001/api/user/${props.profile.idUser}`,
+          userDetails,
+          { headers }
+        )
+        .then(res => {
           // setSuccesAlert(res.data.message);
-          console.log("nicecock");
-        });
+          console.log("nicecock")
+        })
     } catch (error) {
       // setErrorAlert(error.response.data.message);
-      console.log(error.response);
+      console.log(headers)
+      console.log(error.response)
     }
-  };
-
-  useEffect(() => {
-    console.log(props.profile)
-  }, [userDetails])
+  }
 
   return (
     <div className={styles.profileWrapper}>
@@ -75,37 +73,35 @@ export const Profile = (props) => {
         </div>
       </div>
       <form onSubmit={handleSubmit}>
-      <div className={styles.addBIO}>
-        <p>Дополните информацию о себе:</p>
-        <div>
-          
+        <div className={styles.addBIO}>
+          <p>Дополните информацию о себе:</p>
+          <div>
             <input
-              type="text"
-              placeholder="ФИО"
-              color="white"
-              name="FIO"
+              type='text'
+              placeholder='ФИО'
+              color='white'
+              name='FIO'
               onChange={handleChange}
             />
             <input
-              type="text"
-              placeholder="Телефон"
-              name="telephone"
+              type='text'
+              placeholder='Телефон'
+              name='telephone'
               onChange={handleChange}
             />
             <textarea
-              name="description"
+              name='bio'
               onChange={handleChange}
-              id=""
-              cols="30"
-              rows="10"
-              placeholder="О себе"
+              id=''
+              cols='30'
+              rows='10'
+              placeholder='О себе'
             ></textarea>
-          
+          </div>
         </div>
-      </div>
-      <button type='submit'>Сохранить</button>
+        <button type='submit'>Сохранить</button>
       </form>
     </div>
-  );
-};
-export default Profile;
+  )
+}
+export default Profile
