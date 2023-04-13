@@ -36,43 +36,34 @@ export const ModalWindowReg = props => {
     reset()
   }
 
-  // const handleError = () => {
-  //   setShowError(true)
-  //   console.log(showError)
-  // }
 
-  // const {showError, setShowError} = useContext(ErrorContext)
+
   const [showAlert2, setShowAlert2] = useState({})
 
   return (
     <>
-      <div className={styles.modalWrapper}>
-        <div className={styles.modalWindow}>
-          <div className={styles.enterWrapper}>
-            <div>
-              <GlobalErrors object={showAlert2} />
-            </div>
-            <p>Регистрация</p>
-            <BsXLg style={{ cursor: "pointer" }} onClick={props.onCloseModal} />
-          </div>
-
-          <form
-            className={styles.btnsAuth}
-            onSubmit={handleSubmit(handleSubmited)}
-          >
-            <input
-              type='text'
-              placeholder='Логин'
-              {...register("login", {
-                required: "Заполните логин",
-              })}
-            />
-            {errors.login && (
-              <p style={{ color: "red", marginTop: "5px" }}>
-                {errors.login.message}
-              </p>
+    
+    <div className={styles.modalWrapper}>
+        <div>
+           <GlobalErrors object={showAlert2}/>
+        </div>
+      <div className={styles.modalWindow}>
+        <div className={styles.enterWrapper}>
+          <p>Регистрация</p>
+          <BsXLg style={{ cursor: "pointer" }} onClick={props.onCloseModal} />
+        </div>
+        
+        <form
+          className={styles.btnsAuth}
+          onSubmit={handleSubmit(handleSubmited)}
+        >
+          <input
+            type='text'
+            placeholder='Логин'
+            {...register("login", 
+              
             )}
-
+            />
             <input
               type='password'
               placeholder='Пароль'

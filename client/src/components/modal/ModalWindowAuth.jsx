@@ -1,5 +1,7 @@
-import React from "react"
+import React, { useContext, useState} from "react"
 import axios from "axios"
+
+import GlobalErrors from "../UI/GlobalErrors/GlobalErrors"
 
 import styles from "./ModalAuth.module.scss"
 import { useForm } from "react-hook-form"
@@ -23,15 +25,25 @@ export const ModalWindow = props => {
       console.log(response.data)
       localStorage.setItem("token", response.data)
       props.onCloseModal()
+      
     } catch (error) {
-      console.log(error.message)
+      setShowAlert2({
+        active: true,
+        message: error.response.data.message,
+        type: "error",
+      })
     }
 
     reset()
   }
 
+  const [showAlert2, setShowAlert2] = useState({})
+
   return (
     <div className={styles.modalWrapper}>
+        <div>
+           <GlobalErrors object={showAlert2}/>
+        </div>  
       <div className={styles.modalWindow}>
         <div className={styles.enterWrapper}>
           <p>Вход</p>

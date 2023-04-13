@@ -11,7 +11,7 @@ $hover-color: #f17732;
     width: 240px;
   
     margin: 0 auto;
-    background-color: black;
+    background-color: white;
     border-radius: 10px;
 
     padding: 10px 0 10px 0;
@@ -28,14 +28,18 @@ $hover-color: #f17732;
     margin: 0 auto;
     font-size: 18px;
     font-weight: 700;
-    color: white;
+    color: black;
 }
 
 .errorText {
-    color: white;
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin: 0 auto;
     margin-top: 8px;
+
+    text-align: center;
+    
 }

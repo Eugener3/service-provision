@@ -24,10 +24,24 @@ export const Query = props => {
       )
 
       setQueries(result.data)
-      
     }
     fetchQueries(props)
+    console.log(queries)
   }, [props])
+
+  const respondedUserData = []
+  queries.forEach(elem => {
+    elem.responded.forEach(elem => {
+      const token = localStorage.getItem("token")
+      const headers = { Authorization: token }
+      console.log(elem + 'Tot samiuy')
+      const result = axios
+        .get(`http://localhost:3001/api/resume/byuser/${elem}`, {
+          headers,
+        })
+        .then(result => console.log(result.data))
+    })
+  })
 
   return (
     <div className={styles.wrapper}>

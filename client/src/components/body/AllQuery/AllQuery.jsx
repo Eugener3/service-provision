@@ -29,8 +29,13 @@ export const AllQuery = ({ props }) => {
       console.log(queries)
     }
     fetchQueries(props)
+
+
   }, [props])
 
+  
+
+   
   return (
     <div className={styles.wrapper}>
       <MainHeader />
@@ -60,13 +65,13 @@ export const AllQuery = ({ props }) => {
             </div>
 
             <div>
-              <span> Дата завершения:</span> <p>{query.deadline}</p>
+              <span> Дата завершения:</span> <p>{(query.deadline.substring(0, 10))}</p>
             </div>
 
             <div>
-              <span> Цена:</span>{" "}
+              <span> Цена:</span>
               <p>
-                от {query.priceOf} до {query.Af}
+                от {query.priceOf} до {query.priceAf}
               </p>
             </div>
 
