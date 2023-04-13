@@ -1,10 +1,13 @@
 import React, { useState } from "react"
+
 import axios from "axios"
+
 import styles from "./Resume.module.scss"
 
 import "../../../../App.css"
 
 import profileDefault from "../../../../img/photos/profile-default.jpg"
+import GlobalErrors from "../../../UI/GlobalErrors/GlobalErrors"
 
 import { useForm } from "react-hook-form"
 
@@ -43,18 +46,34 @@ export const Resume = () => {
         })
         .then(res => {
           console.log(res.data.message)
+          setShowAlert2({
+            active: true,
+            message: "Резюме успешно создано!",
+            type: "confirm",
+          });
         })
     } catch (error) {
       console.log(error.response.data.message)
       console.log(resumeDetails)
+      setShowAlert2({
+        active: true,
+        message: error.response.data.message,
+        type: "error",
+      });
     }
     setSelectedFile(null)
     setImageUrl("")
     reset()
   }
 
+  const [showAlert2, setShowAlert2] = useState({});
+
+
   return (
     <>
+    <div>
+        <GlobalErrors object={showAlert2} />
+      </div>
       <p className={styles.addMore}>Заполните свои данные</p>
       <form onSubmit={handleSubmit(handleSubmited)}>
         <div className={styles.wrapper}>

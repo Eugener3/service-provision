@@ -92,7 +92,6 @@ export const AllQuery = ({ props }) => {
                 </div>
                 <button
                   className={styles.button}
-                  onSubmit={handleSubmited(query._id)}
                 >
                   Откликнуться
                 </button>
