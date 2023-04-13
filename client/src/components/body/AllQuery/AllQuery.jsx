@@ -25,8 +25,8 @@ export const AllQuery = ({ props }) => {
       const result = await axios.get(`http://localhost:3001/api/query/`, {
         headers,
       })
-
       setQueries(result.data)
+      console.log(queries)
     }
     fetchQueries(props)
   }, [props])

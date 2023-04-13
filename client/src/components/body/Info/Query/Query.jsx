@@ -24,7 +24,7 @@ export const Query = props => {
       )
 
       setQueries(result.data)
-      console.log(queries)
+      
     }
     fetchQueries(props)
   }, [props])
