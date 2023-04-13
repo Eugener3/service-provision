@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const instance = axios.create({
-  baseURL: "http://localhost:3001/api",
+  baseURL: "https://service-provision.onrender.com/api",
 })
 
 export default instance

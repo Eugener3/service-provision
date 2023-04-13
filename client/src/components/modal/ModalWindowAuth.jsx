@@ -19,7 +19,7 @@ export const ModalWindow = props => {
   const handleSubmited = async data => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/auth/login",
+        "https://service-provision.onrender.com/api/auth/login",
         data
       )
       console.log(response.data)

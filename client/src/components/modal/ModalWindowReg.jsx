@@ -19,7 +19,7 @@ export const ModalWindowReg = props => {
   const handleSubmited = async data => {
     try {
       await axios
-        .post("http://localhost:3001/api/auth/register/", data)
+        .post("https://service-provision.onrender.com/api/auth/register/", data)
         .then(res => {
           console.log(res.data.message)
         })

@@ -24,7 +24,7 @@ export const Profile = props => {
   
   const handleSubmited = async data => {
     try {
-      await axios.patch(`http://localhost:3001/api/user/${props.profile.idUser}`, data, { headers })
+      await axios.patch(`https://service-provision.onrender.com/api/user/${props.profile.idUser}`, data, { headers })
       console.log("Данные успешно отправлены!")
     } catch (error) {
       console.log(error.response.data.message)
@@ -40,9 +40,6 @@ export const Profile = props => {
         </div>
         <div>
           <h2>Логин: {props.profile.login}</h2>
-        </div>
-        <div>
-          <h3>Электронная почта: {props.profile.email}</h3>
         </div>
       </div>
       <form onSubmit={handleSubmit(handleSubmited)}>

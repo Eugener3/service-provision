@@ -59,7 +59,7 @@ export const CreateQuery = () => {
     try {
       const headers = await getToken();
       await axios
-        .post("http://localhost:3001/api/query", queryDetails, { headers })
+        .post("https://service-provision.onrender.com/api/query", queryDetails, { headers })
         .then((res) => {
           console.log(res.data.message);
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useMemo } from "react"
 import axios from "axios"
 
 import styles from "./Query.module.scss"
@@ -17,7 +17,7 @@ export const Query = props => {
     const fetchQueries = async props => {
       const headers = await getToken()
       const result = await axios.get(
-        `http://localhost:3001/api/query/byuser/${props.profile.idUser}`,
+        `https://service-provision.onrender.com/api/query/byuser/${props.profile.idUser}`,
         {
           headers,
         }
@@ -28,21 +28,25 @@ export const Query = props => {
     fetchQueries(props)
   }, [props])
 
-  const [respondedUserData, setRespondedUserData] = useState()
-  queries.forEach(elem => {
-    elem.responded.forEach(elem => {
-      const token = localStorage.getItem("token")
-      const headers = { Authorization: token }
-      const result = axios
-        .get(`http://localhost:3001/api/resume/byuser/${elem}`, {
-          headers,
-        })
-        .then(result => {
-          const dataObj = { data: result.data } // создание нового объекта с полем "data"
-          setRespondedUserData(dataObj)
-        })
+  const [respondedUserData, setRespondedUserData] = useState([])
+  useEffect(() => {
+    queries.forEach(elem => {
+      elem.responded.forEach(elem => {
+        const token = localStorage.getItem("token")
+        const headers = { Authorization: token }
+        const result = axios
+          .get(`https://service-provision.onrender.com/api/resume/byuser/${elem}`, {
+            headers,
+          })
+          .then(result => {
+            const dataObj = { data: result.data } // создание нового объекта с полем "data"
+            if (!respondedUserData.includes(dataObj.data.fio)) {
+            setRespondedUserData([...respondedUserData, dataObj])
+            console.log(respondedUserData)}
+          })
+      })
     })
-  })
+  }, [props, queries])
 
   return (
     <div className={styles.wrapper}>
@@ -67,7 +71,7 @@ export const Query = props => {
           </div>
 
           <div>
-            <span> Цена:</span>{" "}
+            <span> Цена:</span>
             <p>
               от {query.priceOf} до {query.priceAf}
             </p>
@@ -78,8 +82,7 @@ export const Query = props => {
           </div>
 
           <div>
-            <span> Откликнулись: </span>
- 
+            <span> Откликнулись: {respondedUserData.map(elem => (<p>{elem.data.FIO}</p>))}</span>
           </div>
         </div>
       ))}

@@ -9,7 +9,7 @@ export const SelectOption = () => {
   const [categories, setCategories] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios("http://localhost:3001/api/category");
+      const result = await axios("https://service-provision.onrender.com/api/category");
       setCategories(result.data);
     };
     fetchData();

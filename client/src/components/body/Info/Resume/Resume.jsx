@@ -38,7 +38,7 @@ export const Resume = () => {
   const handleSubmited = async data => { //data - с формы
     try {
       await axios
-        .post("http://localhost:3001/api/resume/newCandidate", data, { //апи, данные, хэдер
+        .post("https://service-provision.onrender.com/api/resume/newCandidate", data, { //апи, данные, хэдер
           headers,
         })
         .then(res => {
