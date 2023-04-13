@@ -30,6 +30,7 @@ function App() {
         <Route path="/query" element={<CreateQuery/>}/>
         <Route path="/allQuery" element={<AllQuery/>}/>
         <Route path="/findExpert" element={<FindExpert/>}/>
+        <Route path="/servise-provision" element={<Home/>} />
         <Route exact path="/" element={<Home/>} />  
       </Routes>
     </ErrorContext.Provider>
