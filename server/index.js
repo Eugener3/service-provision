@@ -1,6 +1,7 @@
 require("dotenv").config()
 const mongoose = require("mongoose")
-const app = require('./app')
+const app = require('./functions/api')
+const serverless = require("serverless-http")
 const PORT = process.env.PORT || 3001
 const DB_DATA = process.env.DB_DATA
 
@@ -15,3 +16,5 @@ app.listen(PORT, async (error) => {
   }
   console.log(`Server has been started on ${PORT}`)
 })
+
+module.exports.handler = serverless(app)
