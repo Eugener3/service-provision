@@ -8,7 +8,6 @@ import styles from "./ModalReg.module.scss"
 import { BsXLg } from "react-icons/bs"
 import { useForm } from "react-hook-form"
 
-
 export const ModalWindowReg = props => {
   const {
     register,
@@ -16,7 +15,6 @@ export const ModalWindowReg = props => {
     handleSubmit,
     reset,
   } = useForm({ mode: "all" })
-
 
   const handleSubmited = async data => {
     try {
@@ -28,11 +26,17 @@ export const ModalWindowReg = props => {
         .then(() => props.onCloseModal())
     } catch (error) {
       console.log(error.response.data.message)
-      setShowAlert2({active: true, message: error.response.data.message, type: 'error'})
+      setShowAlert2({
+        active: true,
+        message: error.response.data.message,
+        type: "error",
+      })
     }
 
     reset()
   }
+
+
 
   const [showAlert2, setShowAlert2] = useState({})
 
@@ -59,30 +63,24 @@ export const ModalWindowReg = props => {
             {...register("login", 
               
             )}
-          />
-          {errors.login && (
-            <p style={{ color: "red", marginTop: "5px" }}>
-              {errors.login.message}
-            </p>
-          )}
-
-          <input
-            type='password'
-            placeholder='Пароль'
-            {...register("password", 
-       
+            />
+            <input
+              type='password'
+              placeholder='Пароль'
+              {...register("password", {
+                required: "Заполните логин",
+              })}
+            />
+            {errors.password && (
+              <p style={{ color: "red", marginTop: "5px" }}>
+                {errors.password.message}
+              </p>
             )}
-          />
-          {errors.password && (
-            <p style={{ color: "red", marginTop: "5px" }}>
-              {errors.password.message}
-            </p>
-          )}
 
-          <button disabled={!isValid}>Создать аккаунт</button>
-        </form>
+            <button disabled={!isValid}>Создать аккаунт</button>
+          </form>
+        </div>
       </div>
-    </div>
     </>
   )
 }
