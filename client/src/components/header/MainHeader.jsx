@@ -38,7 +38,9 @@ export const MainHeader = props => {
             <Link to='/query'>
               <p>Создать заказ</p>
             </Link>
+            <Link to='/findExpert'>
             <p>Найти специалиста</p>
+            </Link>
             <Link to='/info'>
               <p>Личный кабинет</p>
             </Link>

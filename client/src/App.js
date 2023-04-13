@@ -12,6 +12,7 @@ import CreateQuery from "./components/body/Query/CreateQuery";
 import Profile from "./components/body/Info/Profile/Profile";
 import Info from "./components/body/Info/Info";
 import AllQuery from "./components/body/AllQuery/AllQuery";
+import FindExpert from "./components/body/FindExpert/FindExpert";
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/query" element={<CreateQuery/>}/>
         <Route path="/allQuery" element={<AllQuery/>}/>
+        <Route path="/findExpert" element={<FindExpert/>}/>
         <Route exact path="/" element={<Home/>} />  
       </Routes>
     </ErrorContext.Provider>

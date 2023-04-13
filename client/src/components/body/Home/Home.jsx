@@ -33,7 +33,7 @@ export const Home = () => {
     )}
     <CTAblock />
     <AboutUS/>
-    <div style={{height:'3000px', backgroundColor: 'green'}}></div>
+    
     </div>
   )
 }
