@@ -120,25 +120,26 @@ module.exports = {
                     $push: {responded: decodedData.idUser}
                 }
             if(!(await Resume.findOne({refUser: decodedData.idUser}))) {
-                res.status(404).json({
+                res.status(409).json({
                     message: "У вас нет резюме"
                 })
             }
             else {
-                if(await Query.findOne({responded: {$elemMatch: {$eq: decodedData.idUser}}})) {
-                    res.status(409).json({
-                        message: "Вы уже уведомили заказчика"
-                    })
-                }
-                else{
-                    await Query.updateOne({_id: req.params.id}, update, {
-                        new: true
-                      })
-                    
-                    res.status(200).json({
-                        message: "Уведомление оправлено"
-                    })
-                }    
+                            if(await Query.findOne({responded: {$elemMatch: {$eq: decodedData.idUser}}})) {
+                res.status(409).json({
+                    message: "Вы уже уведомили заказчика"
+                })
+            }
+            else{
+                await Query.updateOne({_id: req.params.id}, update, {
+                    new: true
+                  })
+                
+                res.status(200).json({
+                    message: "Уведомление оправлено"
+                })
+            }
+
             }
 
              }

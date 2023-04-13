@@ -28,7 +28,7 @@ module.exports = {
         try {
             const token = req.headers.authorization.split(' ')[1]
             const decodedData = jwt.verify(token, process.env.SECRET_KEY)
-            const candidate = await Resume.findOne({refUser: decodedData.idUser})
+            const candidate = await Resume.findOne({refUser: req.params.id})
                 res.status(200).json(candidate)
 
         } catch (error) {
