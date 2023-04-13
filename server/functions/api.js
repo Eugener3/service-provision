@@ -26,7 +26,7 @@ app.use('/api/resume', resumeRouters)
 app.use('/.netlify/functions/api/auth', authRouters)
 app.use('/.netlify/functions/query', queryRouters)
 app.use('/.netlify/functions/category', categoryRouters)
-app.use('/.netlify/functions//user', userRouters)
+app.use('/.netlify/functions/user', userRouters)
 app.use('/.netlify/functions/resume', resumeRouters)
 
 
