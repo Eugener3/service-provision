@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/servise-provision/static/css/main.06b90896.css",
+    "main.js": "/servise-provision/static/js/main.d92fe1bf.js",
+    "static/media/teacher.png": "/servise-provision/static/media/teacher.fde456a0dd61cd3045a2.png",
+    "static/media/man.png": "/servise-provision/static/media/man.074c0841267ec9bac7b2.png",
+    "static/media/svarchik.jpg": "/servise-provision/static/media/svarchik.b5bfc30f06753df12cec.jpg",
+    "static/media/background_query.jpg": "/servise-provision/static/media/background_query.815eb17ad747be75950d.jpg",
+    "static/media/stoluar.jpeg": "/servise-provision/static/media/stoluar.6847d483ba094feb3b8e.jpeg",
+    "static/media/doctors2.jpg": "/servise-provision/static/media/doctors2.0593bc2fd8a13cf8c19f.jpg",
+    "static/media/doctors1.jpg": "/servise-provision/static/media/doctors1.ad1ed7ee8284087fe9ee.jpg",
+    "static/media/doctors3.jpg": "/servise-provision/static/media/doctors3.fa689b1037dbf69567a3.jpg",
+    "static/media/profile-default.jpg": "/servise-provision/static/media/profile-default.f00a59e7437746ee3074.jpg",
+    "static/media/logo.svg": "/servise-provision/static/media/logo.fabdefdd2e3b9262a7312afb5b020224.svg",
+    "index.html": "/servise-provision/index.html",
+    "main.06b90896.css.map": "/servise-provision/static/css/main.06b90896.css.map",
+    "main.d92fe1bf.js.map": "/servise-provision/static/js/main.d92fe1bf.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.06b90896.css",
+    "static/js/main.d92fe1bf.js"
+  ]
+}
