@@ -26,20 +26,21 @@ export const Query = props => {
       setQueries(result.data)
     }
     fetchQueries(props)
-    console.log(queries)
   }, [props])
 
-  const respondedUserData = []
+  const [respondedUserData, setRespondedUserData] = useState()
   queries.forEach(elem => {
     elem.responded.forEach(elem => {
       const token = localStorage.getItem("token")
       const headers = { Authorization: token }
-      console.log(elem + 'Tot samiuy')
       const result = axios
         .get(`http://localhost:3001/api/resume/byuser/${elem}`, {
           headers,
         })
-        .then(result => console.log(result.data))
+        .then(result => {
+          const dataObj = { data: result.data } // создание нового объекта с полем "data"
+          setRespondedUserData(dataObj)
+        })
     })
   })
 
@@ -74,6 +75,11 @@ export const Query = props => {
 
           <div>
             <span> Категория: </span> <p>{query.category}</p>
+          </div>
+
+          <div>
+            <span> Откликнулись: </span>
+ 
           </div>
         </div>
       ))}
