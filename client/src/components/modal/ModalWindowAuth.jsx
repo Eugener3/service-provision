@@ -26,6 +26,7 @@ export const ModalWindow = props => {
       localStorage.setItem("token", response.data)
       props.onCloseModal()
       
+      
     } catch (error) {
       setShowAlert2({
         active: true,
